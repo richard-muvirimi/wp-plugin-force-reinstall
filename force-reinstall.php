@@ -14,8 +14,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Force Reinstall
- * Plugin URI:        https://tyganeutronics.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin URI:        https://tyganeutronics.com/force-reinstall
+ * Description:       Easily force a Plugin or Theme reinstall from WordPress.org
  * Version:           1.0.0
  * Author:            Richard Muvirimi
  * Author URI:        https://tyganeutronics.com
@@ -26,7 +26,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
@@ -35,14 +35,15 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'FORCE_REINSTALL_VERSION', '1.0.0' );
+define('FORCE_REINSTALL_VERSION', '1.0.0');
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-force-reinstall-activator.php
  */
-function activate_force_reinstall() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-force-reinstall-activator.php';
+function activate_force_reinstall()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-force-reinstall-activator.php';
 	Force_Reinstall_Activator::activate();
 }
 
@@ -50,19 +51,20 @@ function activate_force_reinstall() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-force-reinstall-deactivator.php
  */
-function deactivate_force_reinstall() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-force-reinstall-deactivator.php';
+function deactivate_force_reinstall()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-force-reinstall-deactivator.php';
 	Force_Reinstall_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_force_reinstall' );
-register_deactivation_hook( __FILE__, 'deactivate_force_reinstall' );
+register_activation_hook(__FILE__, 'activate_force_reinstall');
+register_deactivation_hook(__FILE__, 'deactivate_force_reinstall');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-force-reinstall.php';
+require plugin_dir_path(__FILE__) . 'includes/class-force-reinstall.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +75,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-force-reinstall.php';
  *
  * @since    1.0.0
  */
-function run_force_reinstall() {
+function run_force_reinstall()
+{
 
 	$plugin = new Force_Reinstall();
 	$plugin->run();
-
 }
 run_force_reinstall();

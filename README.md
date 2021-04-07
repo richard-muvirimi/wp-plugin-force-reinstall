@@ -1,16 +1,17 @@
-=== Force Reinstall ===
-Contributors: tygalive
-Donate link: https://tyganeutronics.com
-Tags: plugin, theme, install, update, corrupted, fix, reinstall, redo
-Requires at least: 4.7
-Tested up to: 5.7
-Stable tag: 1.0.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# Force Reinstall
+
+**_Contributors:_** tygalive
+**_Donate link:_** https://tyganeutronics.com
+**_Tags:_** plugin, theme, install, update, corrupted, fix, reinstall, redo
+**_Requires at least:_** 4.7
+**_Tested up to:_** 5.7
+**_Stable tag:_** 1.0.0
+**_License:_** GPLv2 or later
+**_License URI:_** http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily force a Plugin or Theme reinstall from WordPress.org
 
-== Description ==
+## Description
 
 Ever had an update break in the middle or simply not sure if your plugins are still intact after malware removal or maybe just something else?
 
@@ -18,45 +19,35 @@ Then you have come across the correct plugin, just click `Force Reinstall` and p
 
 This is only temporarily set and is reset when you visit the updates page or update a single plugin/theme so you don't have to worry about any plugin or theme files being manipulated
 
-== Installation ==
+## Installation
 
-= Automatic installation =
+### Automatic installation
 
 Automatic installation is the easiest option -- WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Zimrate, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
- 
-In the search field type “ZimRate”, then click “Search Plugins.” Once you’ve found us,  you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Clicking “Install Now,” and WordPress will take it from there.
 
-= Manual installation =
+In the search field type “ZimRate”, then click “Search Plugins.” Once you’ve found us, you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Clicking “Install Now,” and WordPress will take it from there.
+
+### Manual installation
 
 1. Upload `force-reinstall.php` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= What it if I change my mind? =
+#### What it if i change my mind?
 
 Simple, Wordpress will refresh plugin and theme versions when you visit the updates page or update at least one.
 
-= Why do some plugins/themes not have a reinstall option? =
+#### Why do some plugins/themes not have a reinstall option?
 
 Most probably they do not have a download link and where probably manually installed and ending up having a different link than what is available from WordPress.org
 
-== Screenshots ==
+## Changelog
 
-1. Before force reinstalling plugins
-2. Force reinstalled plugins requesting update
-3. Before force reinstalling theme
-4. Force reinstalled theme requesting update
-5. Before force reinstalling theme
-6. Force reinstalled theme requesting update
-7. Selecting plugins to bulk update
-8. Wordpress bulk update plugins page
+**_1.0.0_**
 
-== Changelog ==
+- Initial Release
 
-= 1.0.0 =
-* Initial Release
-
-== Upgrade Notice ==
+## Upgrade Notice
 
 We are always updating this plugin to give the best experience on WordPress
