@@ -97,17 +97,17 @@ class Force_Reinstall_Admin
 	 * Get theme action button
 	 *
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @return void
 	 */
 	private function getThemeActionButton()
 	{
 
 		$arguments = array(
-			"action" => $this->plugin_name,
-			$this->plugin_name . "-nonce" => wp_create_nonce($this->plugin_name),
-			$this->plugin_name => "" //the rest of the url will be appended by js
+			$this->plugin_name => "",
+			$this->plugin_name . "-target" => "theme"
 		);
-		$target =  admin_url(get_current_screen()->base . ".php") . "?" . http_build_query($arguments);
+		$target =  force_reinstall_target_self($arguments);
 
 		return	sprintf(
 			'<a class="button ' . $this->plugin_name . '" href="%s">%s</a>',
@@ -120,6 +120,7 @@ class Force_Reinstall_Admin
 	 * Add plugins page actions
 	 * 
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @param array $actions
 	 * @param string $plugin_file
 	 * @param array $plugin_data
@@ -131,16 +132,12 @@ class Force_Reinstall_Admin
 		if ((isset($plugin_data["url"]) && strlen($plugin_data["url"]) != 0) &&  (isset($plugin_data["package"]) && strlen($plugin_data["package"]) != 0)) {
 
 			//target same page with plugin name to keep arguments
-			$arguments = array_merge(
-				array(
-					"action" => $this->plugin_name,
-					$this->plugin_name => $plugin_file,
-					$this->plugin_name . "-nonce" => wp_create_nonce($this->plugin_name)
-				),
-				filter_input_array(INPUT_GET) ?: array()
+			$arguments = 				array(
+				$this->plugin_name => $plugin_file,
+				$this->plugin_name . "-target" => "plugin"
 			);
 
-			$target = admin_url(get_current_screen()->base . ".php") . "?" . http_build_query($arguments);
+			$target = force_reinstall_target_self($arguments);
 
 			$link =  sprintf(
 				'<a href="%s">%s</a>',
@@ -155,25 +152,54 @@ class Force_Reinstall_Admin
 	}
 
 	/**
-	 * Force an update on requested item
+	 * Handle requested action
 	 * 
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @return void
 	 */
-	function force_update()
+	function handle_action()
 	{
 
-		$target =	filter_input(INPUT_GET, $this->plugin_name);
+		if (wp_verify_nonce(filter_input(INPUT_GET, $this->plugin_name . "-nonce"), $this->plugin_name)) {
 
-		if ($target && wp_verify_nonce(filter_input(INPUT_GET, $this->plugin_name . "-nonce"), $this->plugin_name)) {
+			switch (filter_input(INPUT_GET, $this->plugin_name . "-target")) {
+				case "plugin":
+				case "theme":
 
-			$this->_force_update($target);
+					$target =	filter_input(INPUT_GET, $this->plugin_name);
 
-			$this->request_rating();
+					if ($target) {
 
-			//remove our args and redirect
-			wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name), $_SERVER['REQUEST_URI']));
-			exit;
+						$this->_force_update($target);
+
+						//remove our args and redirect
+						wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
+						exit;
+					}
+					break;
+				case "rate":
+					//remind again in three months
+					set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+
+					wp_redirect("https://wordpress.org/support/plugin/force-reinstall/reviews/");
+					exit;
+					break;
+				case "later":
+					//remind after a week
+					set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS * 7);
+
+					wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
+					exit;
+					break;
+				case "never":
+					set_transient($this->plugin_name . "-rate", true, YEAR_IN_SECONDS);
+
+					wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
+					exit;
+					break;
+				default:
+			}
 		}
 	}
 
@@ -181,6 +207,7 @@ class Force_Reinstall_Admin
 	 * Force an update on requested item
 	 *
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @param string $target
 	 * @return void
 	 */
@@ -199,13 +226,6 @@ class Force_Reinstall_Admin
 			//remove from no_updates
 			unset($updates->no_update[$target]);
 
-			//modify version to force an update
-			if (is_array($item)) {
-				$item["new_version"] = $this->subtractVersion($item["new_version"]);
-			} else {
-				$item->{"new_version"} = $this->subtractVersion($item->{"new_version"});
-			}
-
 			//add to updates
 			$updates->response[$target] = $item;
 
@@ -221,12 +241,19 @@ class Force_Reinstall_Admin
 	 * Add Plugins bulk acton
 	 *
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @param array $actions
 	 * @return array
 	 */
 	public function add_plugins_bulk_action($actions)
 	{
-		$actions[$this->plugin_name] = __('Force Reinstall', $this->plugin_name);
+
+		global $wp_version;
+
+		//https://developer.wordpress.org/reference/hooks/handle_bulk_actions-screen/
+		if (version_compare($wp_version, "4.7", ">=")) {
+			$actions[$this->plugin_name] = __('Force Reinstall', $this->plugin_name);
+		}
 		return $actions;
 	}
 
@@ -234,6 +261,7 @@ class Force_Reinstall_Admin
 	 * Force update on plugins
 	 *
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @param string $redirect
 	 * @param string $action
 	 * @param array $plugins
@@ -249,77 +277,23 @@ class Force_Reinstall_Admin
 			}
 		}
 
-		$this->request_rating();
-
 		return admin_url("update-core.php");
-	}
-
-	/**
-	 * Get a lower version number than provided
-	 *
-	 * @since 1.0.0
-	 * @param string $version
-	 * @return void
-	 */
-	private function subtractVersion($version)
-	{
-
-		/* 		$_version = "1";
-		while (version_compare($_version, $version, ">=")) {
-			$_version = "0." . $_version;
-		}
-		return $_version; */
-
-		$versions = explode(".", $version);
-		$length = count($versions);
-
-		if ($length == 1) {
-			//version is int
-			$_version = "1";
-			while (version_compare($_version, $versions[0], ">=")) {
-				$_versions = "0." . $_version;
-			}
-			$versions = explode(".", $_versions);
-		} else if ($length != 0 && intval($versions[$length - 1]) == 0) {
-			//last element is zero and cannot subtract zero
-
-			//1.0.0
-			//1.0
-			//1
-			while (count($versions) != 0 && intval($versions[count($versions) - 1]) == 0) {
-				array_pop($versions);
-			}
-
-			//now try working on it
-			$versions = explode(".", $this->subtractVersion(implode(".", $versions)));
-		} else {
-			$versions[$length - 1]--;
-		}
-
-		return implode(".", $versions ?: $this->subtractVersion("1"));
 	}
 
 	/**
 	 * Show rating request
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
+	 * @version 1.0.1
 	 * @return void
 	 */
-	public function request_rating()
+	public function show_rating()
 	{
-
 		/**
-		 * When shown, will persist for a minute then wait quarter year
+		 * Request Rating
 		 */
-		if (boolval(get_transient($this->plugin_name . "-rate-persist")) === true || boolval(get_transient($this->plugin_name . "-rate")) === false) {
-			include plugin_dir_path(__FILE__) . "/partials/force-reinstall-admin-rating.php";
-
-			if (boolval(get_transient($this->plugin_name . "-rate-persist")) === false) {
-				//remind again quarter year
-				set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
-
-				set_transient($this->plugin_name . "-rate-persist", true, MINUTE_IN_SECONDS * 1.5);
-			}
+		if (boolval(get_transient($this->plugin_name . "-rate")) === false) {
+			include plugin_dir_path(__FILE__) . "partials/force-reinstall-admin-rating.php";
 		}
 	}
 }

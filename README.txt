@@ -2,9 +2,9 @@
 Contributors: tygalive
 Donate link: https://tyganeutronics.com
 Tags: plugin, theme, install, update, corrupted, fix, reinstall, redo
-Requires at least: 4.7
+Requires at least: 4.0
 Tested up to: 5.7
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Easily force a Plugin or Theme reinstall from WordPress.org
 
 Ever had an update break in the middle or simply not sure if your plugins are still intact after malware removal or maybe just something else?
 
-Then you have come across the correct plugin, just click `Force Reinstall` and plugin will set the plugin or theme's version to a smaller version thus forcing WordPress to update the plugin or theme.
+Then you have come across the correct plugin, just click `Force Reinstall` and plugin will set the plugin or theme as needing an update thus forcing WordPress to update the plugin or theme.
 
 This is only temporarily set and is reset when you visit the updates page or update a single plugin/theme so you don't have to worry about any plugin or theme files being manipulated
 
@@ -41,6 +41,10 @@ Simple, Wordpress will refresh plugin and theme versions when you visit the upda
 
 Most probably they do not have a download link and where probably manually installed and ending up having a different link than what is available from WordPress.org
 
+= Will my data be affected =
+
+No. This will just effectively force WordPress to replace plugin or theme files only, nothing else.
+
 == Screenshots ==
 
 1. Before force reinstalling plugins
@@ -53,6 +57,9 @@ Most probably they do not have a download link and where probably manually insta
 8. Wordpress bulk update plugins page
 
 == Changelog ==
+
+= 1.0.1 =
+* Minor optimisations
 
 = 1.0.0 =
 * Initial Release

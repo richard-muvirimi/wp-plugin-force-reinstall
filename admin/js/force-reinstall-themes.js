@@ -15,13 +15,6 @@
 				let url = new URL(element.attr("href"));
 				url.searchParams.set("force-reinstall", $(this).data("slug"));
 
-				//copy window params
-				let params = new URLSearchParams(new URL(window.location).search);
-
-				for (var pair of params.entries()) {
-					url.searchParams.set(pair[0], pair[1]);
-				}
-
 				element.attr("href", url.href);
 
 				$(this).find(".theme-actions").prepend(element);

@@ -20,7 +20,8 @@
  * @subpackage Force_Reinstall/includes
  * @author     Richard Muvirimi <tygalive@gmail.com>
  */
-class Force_Reinstall_Activator {
+class Force_Reinstall_Activator
+{
 
 	/**
 	 * Short Description. (use period)
@@ -29,8 +30,10 @@ class Force_Reinstall_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
-
+	public static function activate()
+	{
+		if (boolval(get_transient(force_reinstall_name() . "-rate")) === false) {
+			set_transient(force_reinstall_name() . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+		}
 	}
-
 }

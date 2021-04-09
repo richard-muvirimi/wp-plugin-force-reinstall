@@ -124,6 +124,11 @@ class Force_Reinstall
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-force-reinstall-public.php';
 
+		/**
+		 * Functions file
+		 */
+		require_once plugin_dir_path(__FILE__) . 'force-reinstall-functions.php';
+
 		$this->loader = new Force_Reinstall_Loader();
 	}
 
@@ -161,7 +166,9 @@ class Force_Reinstall
 
 		$this->loader->add_filter('plugin_action_links', $plugin_admin, 'plugin_action_links', 10, 3);
 
-		$this->loader->add_filter('admin_action_' . $this->plugin_name, $plugin_admin, 'force_update');
+		$this->loader->add_filter('admin_notices', $plugin_admin, 'show_rating');
+
+		$this->loader->add_filter('admin_action_' . $this->plugin_name, $plugin_admin, 'handle_action');
 
 		$this->loader->add_filter('bulk_actions-plugins', $plugin_admin, 'add_plugins_bulk_action');
 		$this->loader->add_filter('handle_bulk_actions-plugins', $plugin_admin, 'plugins_bulk_update', 10, 3);
