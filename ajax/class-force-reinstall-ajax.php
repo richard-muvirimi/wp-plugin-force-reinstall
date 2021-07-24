@@ -12,7 +12,7 @@ if (!defined('WPINC')) {
  * @subpackage Force_reinstall/admin
  *
  * @link https://tyganeutronics.com/force-reinstall/
- * @since 1.0.0
+ * @since 1.0.2
  */
 
 /**
@@ -34,7 +34,7 @@ class Force_reinstall_Ajax
      *
      * @access private
      * @var string $plugin_name The ID of this plugin.
-     * @since 1.0.0
+     * @since 1.0.2
      */
     private $plugin_name;
 
@@ -43,7 +43,7 @@ class Force_reinstall_Ajax
      *
      * @access private
      * @var string $version The current version of this plugin.
-     * @since 1.0.0
+     * @since 1.0.2
      */
     private $version;
 
@@ -53,7 +53,7 @@ class Force_reinstall_Ajax
      *            The name of this plugin.
      *            The version of this plugin.
      *
-     * @since 1.0.0
+     * @since 1.0.2
      *
      * @param string $plugin_name
      * @param string $version
@@ -65,12 +65,19 @@ class Force_reinstall_Ajax
         $this->version     = $version;
     }
 
+    /**
+     * Set reminder for half a year and send redirect link
+     * 
+     * @since 1.0.2
+     *
+     * @return void
+     */
     public function ajaxDoRate()
     {
         if (check_ajax_referer("wcg-rate", "_ajax_nonce", false) !== false) {
 
             //remind again in three months
-            set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+            set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 6 : YEAR_IN_SECONDS / 2);
 
             echo wp_send_json(array(
                 "redirect" => "https://wordpress.org/support/plugin/" . $this->plugin_name . "/reviews/"
@@ -78,13 +85,20 @@ class Force_reinstall_Ajax
         }
     }
 
+    /**
+     * Remind again in a week
+     * 
+     * @since 1.0.2
+     *
+     * @return void
+     */
     public function ajaxDoRemind()
     {
 
         if (check_ajax_referer("wcg-remind", "_ajax_nonce", false) !== false) {
 
             //remind after a week
-            set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS * 7);
+            set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS);
 
             echo wp_send_json(array(
                 "success" => true
@@ -92,6 +106,13 @@ class Force_reinstall_Ajax
         }
     }
 
+    /**
+     * Remind in a year
+     * 
+     * @since 1.0.2
+     *
+     * @return void
+     */
     public function ajaxDoCancel()
     {
         if (check_ajax_referer("wcg-cancel", "_ajax_nonce", false) !== false) {

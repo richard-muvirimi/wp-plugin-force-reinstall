@@ -4,8 +4,8 @@
 - **_Donate link:_** https://tyganeutronics.com
 - **_Tags:_** plugin, theme, install, update, corrupted, fix, reinstall, redo
 - **_Requires at least:_** 4.0
-- **_Tested up to:_** 5.7
-- **_Stable tag:_** 1.0.1
+- **_Tested up to:_** 5.8
+- **_Stable tag:_** 1.0.2
 - **_License:_** GPLv2 or later
 - **_License URI:_** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,9 +23,9 @@ This is only temporarily set and is reset when you visit the updates page or upd
 
 ### Automatic installation
 
-Automatic installation is the easiest option -- WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Zimrate, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
+Automatic installation is the easiest option -- WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Force Reinstall, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
 
-In the search field type “ZimRate”, then click “Search Plugins.” Once you’ve found us, you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Clicking “Install Now,” and WordPress will take it from there.
+In the search field type “Force Reinstall”, then click “Search Plugins.” Once you’ve found us, you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Clicking “Install Now,” and WordPress will take it from there.
 
 ### Manual installation
 
@@ -47,6 +47,10 @@ Most probably they do not have a download link and where probably manually insta
 No. This will just effectively force WordPress to replace plugin or theme files only, nothing else.
 
 ## Changelog
+
+**_1.0.2_**
+
+- Minor Bug Fixes
 
 **_1.0.1_**
 
