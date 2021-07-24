@@ -64,7 +64,7 @@ class Force_Reinstall_Admin
 	 */
 	public function enqueue_styles()
 	{
-		//wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/force-reinstall-admin.css', array(), $this->version, 'all');
+		wp_register_style($this->plugin_name . "-rate", plugin_dir_url(__FILE__) . 'css/force-reinstall-admin.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -91,6 +91,12 @@ class Force_Reinstall_Admin
 				));
 				break;
 		}
+
+		wp_register_script($this->plugin_name . "-rate", plugin_dir_url(__FILE__) . 'js/force-reinstall-rate.js', array('jquery'), $this->version, false);
+		wp_localize_script($this->plugin_name . "-rate", "force_reinstall", array(
+			"ajax_url" => admin_url('admin-ajax.php'),
+			"name" => $this->plugin_name
+		));
 	}
 
 	/**
@@ -177,26 +183,6 @@ class Force_Reinstall_Admin
 						wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
 						exit;
 					}
-					break;
-				case "rate":
-					//remind again in three months
-					set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
-
-					wp_redirect("https://wordpress.org/support/plugin/force-reinstall/reviews/");
-					exit;
-					break;
-				case "later":
-					//remind after a week
-					set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS * 7);
-
-					wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
-					exit;
-					break;
-				case "never":
-					set_transient($this->plugin_name . "-rate", true, YEAR_IN_SECONDS);
-
-					wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
-					exit;
 					break;
 				default:
 			}
@@ -293,6 +279,9 @@ class Force_Reinstall_Admin
 		 * Request Rating
 		 */
 		if (boolval(get_transient($this->plugin_name . "-rate")) === false) {
+			wp_enqueue_script($this->plugin_name . "-rate");
+			wp_enqueue_style($this->plugin_name . "-rate");
+
 			include plugin_dir_path(__FILE__) . "partials/force-reinstall-admin-rating.php";
 		}
 	}

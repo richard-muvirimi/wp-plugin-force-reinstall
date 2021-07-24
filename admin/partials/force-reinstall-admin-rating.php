@@ -18,25 +18,25 @@ if (!defined('WPINC')) {
  */;
 ?>
 
-<div class="notice notice-info is-dismissible">
-    <div style="margin: 20px 5px;">
-        <span
-            class="float: left;"><?php printf(__('Please consider rating %s as it will encourage others to install it too.', force_reinstall_name()), __("Force Reinstall", force_reinstall_name())); ?></span>
-        <span style="float: right;">
-            <a class="button"
-                href="<?php echo force_reinstall_target_self(array(force_reinstall_name() . "-target" => "rate")) ?>"
-                target="_blank">
-                <?php _e('Rate ', force_reinstall_name()); ?>
+<div class="<?php esc_attr_e($this->plugin_name) ?> notice notice-info is-dismissible">
+    <div>
+        <div class="<?php esc_attr_e($this->plugin_name) ?>-prompt">
+            <?php printf(__('Please consider rating %s as it will encourage others to install it too.', $this->plugin_name), __("Force Reinstall", $this->plugin_name)); ?>
+        </div>
+        <div class="<?php esc_attr_e($this->plugin_name) ?>-button">
+            <a class="button btn-rate" href="#" data-nonce="<?php esc_attr_e(wp_create_nonce("wcg-rate")) ?>"
+                data-action="<?php esc_attr_e("rate") ?>">
+                <?php _e('Rate ', $this->plugin_name); ?>
                 <span style="color:#ffb900;">&starf;&starf;&starf;&starf;&starf;</span>
             </a>
-            <a class="button"
-                href="<?php echo force_reinstall_target_self(array(force_reinstall_name() . "-target" => "later")) ?>">
-                <span><?php _e('Remind me later', force_reinstall_name()); ?></span>
+            <a class="button btn-remind" href="#" data-nonce="<?php esc_attr_e(wp_create_nonce("wcg-remind")) ?>"
+                data-action="<?php esc_attr_e("remind") ?>">
+                <span><?php _e('Remind me later', $this->plugin_name); ?></span>
             </a>
-            <a class="button"
-                href="<?php echo force_reinstall_target_self(array(force_reinstall_name() . "-target" => "never")) ?>">
-                <span><?php _e('Never', force_reinstall_name()); ?></span>
+            <a class="button btn-cancel" href="#" data-nonce="<?php esc_attr_e(wp_create_nonce("wcg-cancel")) ?>"
+                data-action="<?php esc_attr_e("cancel") ?>">
+                <span><?php _e('Never', $this->plugin_name); ?></span>
             </a>
-        </span>
+        </div>
     </div>
 </div>
