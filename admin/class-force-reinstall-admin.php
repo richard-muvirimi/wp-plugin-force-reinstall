@@ -224,7 +224,7 @@ class Force_Reinstall_Admin
 	}
 
 	/**
-	 * Add Plugins bulk acton
+	 * Add Plugins bulk action
 	 *
 	 * @since 1.0.0
 	 * @version 1.0.1

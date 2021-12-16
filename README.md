@@ -5,7 +5,7 @@
 - **_Tags:_** plugin, theme, install, update, corrupted, fix, reinstall, redo
 - **_Requires at least:_** 4.0
 - **_Tested up to:_** 5.8
-- **_Stable tag:_** 1.0.2
+- **_Stable tag:_** 1.0.3
 - **_License:_** GPLv2 or later
 - **_License URI:_** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,7 +48,7 @@ No. This will just effectively force WordPress to replace plugin or theme files 
 
 ## Changelog
 
-**_1.0.2_**
+**_1.0.2_ - _1.0.3_**
 
 - Minor Bug Fixes
 

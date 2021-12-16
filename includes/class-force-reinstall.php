@@ -161,6 +161,7 @@ class Force_Reinstall
 	 * of the plugin.
 	 *
 	 * @since    1.0.0
+	 * @version  1.0.3
 	 * @access   private
 	 */
 	private function define_admin_hooks()
@@ -175,6 +176,8 @@ class Force_Reinstall
 
 		$this->loader->add_filter('admin_notices', $plugin_admin, 'show_rating');
 
+		$this->loader->add_filter('admin_action_' . $this->plugin_name, $plugin_admin, 'handle_action');
+
 		$this->loader->add_filter('bulk_actions-plugins', $plugin_admin, 'add_plugins_bulk_action');
 		$this->loader->add_filter('handle_bulk_actions-plugins', $plugin_admin, 'plugins_bulk_update', 10, 3);
 	}
@@ -185,6 +188,7 @@ class Force_Reinstall
 	 *
 	 * @access private
 	 * @since 1.0.0
+	 * @version 1.0.0
 	 */
 	private function define_ajax_hooks()
 	{
