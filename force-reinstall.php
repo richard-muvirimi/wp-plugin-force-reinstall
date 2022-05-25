@@ -3,11 +3,6 @@
 /**
  * The plugin bootstrap file
  *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @link              https://tyganeutronics.com
  * @since             1.0.0
  * @package           Force_Reinstall
@@ -16,7 +11,7 @@
  * Plugin Name:       Force Reinstall
  * Plugin URI:        https://tyganeutronics.com/force-reinstall
  * Description:       Easily force a Plugin or Theme reinstall from WordPress.org
- * Version:           1.0.3
+ * Version:           1.1.0
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com
  * License:           GPL-2.0+
@@ -25,60 +20,39 @@
  * Domain Path:       /languages
  */
 
+use Rich4rdMuvirimi\ForceReinstall\ForceReinstall;
+
 // If this file is called directly, abort.
-if (!defined('WPINC')) {
+if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-/**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
- */
-define('FORCE_REINSTALL_VERSION', '1.0.3');
+ /**
+  * The plugin slug, one source of truth for context
+  */
+  define( 'FORCE_REINSTALL_SLUG', 'force-reinstall' );
+
+  /**
+   * Plugin version number
+   */
+  define( 'FORCE_REINSTALL_VERSION', '1.1.0' );
+
+  /**
+   * Reference to this file, and this file only, (well, plugin entry point)
+   */
+   define( 'FORCE_REINSTALL_FILE', __FILE__ );
+
+  /**
+   * Plugin name as known to WordPress
+   */
+  define( 'FORCE_REINSTALL_NAME', plugin_basename( FORCE_REINSTALL_FILE ) );
 
 /**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-force-reinstall-activator.php
+ * Load composer
  */
-function activate_force_reinstall()
-{
-	require_once plugin_dir_path(__FILE__) . 'includes/class-force-reinstall-activator.php';
-	Force_Reinstall_Activator::activate();
-}
+require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 /**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-force-reinstall-deactivator.php
+ * And away we go
  */
-function deactivate_force_reinstall()
-{
-	require_once plugin_dir_path(__FILE__) . 'includes/class-force-reinstall-deactivator.php';
-	Force_Reinstall_Deactivator::deactivate();
-}
-
-register_activation_hook(__FILE__, 'activate_force_reinstall');
-register_deactivation_hook(__FILE__, 'deactivate_force_reinstall');
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path(__FILE__) . 'includes/class-force-reinstall.php';
-
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_force_reinstall()
-{
-
-	$plugin = new Force_Reinstall();
-	$plugin->run();
-}
-run_force_reinstall();
+ForceReinstall::instance()->run();

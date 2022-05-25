@@ -4,9 +4,9 @@
  */
 
 .force-reinstall-prompt {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .force-reinstall.notice > div {
-  margin: 20px 5px;
+	margin: 20px 5px;
 }

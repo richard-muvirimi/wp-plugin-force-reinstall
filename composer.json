@@ -1,0 +1,58 @@
+{
+    "name": "rich4rdmuvirimi/force-reinstall",
+    "description": "Easily force a Plugin or Theme reinstall from WordPress.org",
+    "type": "wordpress-plugin",
+    "license": "GNU-V2",
+    "autoload": {
+        "psr-4": {
+            "Rich4rdMuvirimi\\ForceReinstall\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rich4rdMuvirimi\\ForceReinstall\\Tests\\": "tests/src/",
+            "Rich4rdMuvirimi\\ForceReinstall\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "5.6"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "qc": [
+            "@phpcs .",
+            "@test"
+        ],
+        "phpcs": [
+            "vendor/bin/phpcs"
+        ],
+        "test": [
+            "phpunit"
+        ],
+        "dist": [
+            "bash rsync.sh"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Richard Muvirimi",
+            "email": "rich4rdmuvirimi@gmail.com",
+            "homepage": "https://tyganeutronics.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "5.6 || ^7.0 || ^8.0"
+    },
+    "require-dev": {
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpunit/phpunit": "^5.7",
+        "brain/monkey": "^2.6",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2"
+    }
+}

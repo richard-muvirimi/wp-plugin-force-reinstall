@@ -1,60 +1,30 @@
 <?php
-
 /**
- * The admin-specific functionality of the plugin.
+ * File for the Admin controller
  *
- * @link       https://tyganeutronics.com
- * @since      1.0.0
+ * @package ForceReinstall
+ * @subpackage ForceReinstall/Controller
  *
- * @package    Force_Reinstall
- * @subpackage Force_Reinstall/admin
+ * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @since 1.0.0
+ * @version 1.0.0
  */
 
+namespace Rich4rdMuvirimi\ForceReinstall\Controller;
+
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+
 /**
- * The admin-specific functionality of the plugin.
+ * Admin side controller
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
+ * @package ForceReinstall
+ * @subpackage ForceReinstall/Controller
  *
- * @package    Force_Reinstall
- * @subpackage Force_Reinstall/admin
- * @author     Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @since 1.0.0
+ * @version 1.0.1
  */
-class Force_Reinstall_Admin
-{
-
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
-
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
-	 * @return void
-	 */
-	public function __construct($plugin_name, $version)
-	{
-
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-	}
+class Admin extends BaseController {
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -64,7 +34,7 @@ class Force_Reinstall_Admin
 	 */
 	public function enqueue_styles()
 	{
-		wp_register_style($this->plugin_name . "-rate", plugin_dir_url(__FILE__) . 'css/force-reinstall-admin.css', array(), $this->version, 'all');
+		wp_register_style(Functions::get_plugin_slug( "-rate"),Functions::get_style_url('admin-rating.css'), array(), FORCE_REINSTALL_VERSION, 'all');
 	}
 
 	/**
@@ -85,17 +55,17 @@ class Force_Reinstall_Admin
 				 * tried "plugin_action_links" but could not be found on the front end
 				 * But then again...
 				 */
-				wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/force-reinstall-themes.js', array('jquery'), $this->version, false);
-				wp_localize_script($this->plugin_name, "force_reinstall", array(
+				wp_enqueue_script(FORCE_REINSTALL_SLUG, Functions::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
+				wp_localize_script(FORCE_REINSTALL_SLUG, "force_reinstall", array(
 					"button" => $this->getThemeActionButton()
 				));
 				break;
 		}
 
-		wp_register_script($this->plugin_name . "-rate", plugin_dir_url(__FILE__) . 'js/force-reinstall-rate.js', array('jquery'), $this->version, false);
-		wp_localize_script($this->plugin_name . "-rate", "force_reinstall", array(
+		wp_register_script(Functions::get_plugin_slug( "-rate"), Functions::get_script_url( 'admin-rating.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
+		wp_localize_script(Functions::get_plugin_slug( "-rate"), "force_reinstall", array(
 			"ajax_url" => admin_url('admin-ajax.php'),
-			"name" => $this->plugin_name
+			"name" => FORCE_REINSTALL_SLUG
 		));
 	}
 
@@ -110,15 +80,16 @@ class Force_Reinstall_Admin
 	{
 
 		$arguments = array(
-			$this->plugin_name => "",
-			$this->plugin_name . "-target" => "theme"
+			FORCE_REINSTALL_SLUG => "",
+			Functions::get_plugin_slug( "-target") => "theme"
 		);
-		$target =  force_reinstall_target_self($arguments);
+		$target =  Functions::force_reinstall_target_self($arguments);
 
 		return	sprintf(
-			'<a class="button ' . $this->plugin_name . '" href="%s">%s</a>',
+			'<a class="button %s" href="%s">%s</a>',
+			esc_attr(FORCE_REINSTALL_SLUG),
 			esc_attr($target),
-			__('Force Reinstall', $this->plugin_name)
+			__('Force Reinstall', FORCE_REINSTALL_SLUG)
 		);
 	}
 
@@ -139,16 +110,16 @@ class Force_Reinstall_Admin
 
 			//target same page with plugin name to keep arguments
 			$arguments = 				array(
-				$this->plugin_name => $plugin_file,
-				$this->plugin_name . "-target" => "plugin"
+				FORCE_REINSTALL_SLUG => $plugin_file,
+				Functions::get_plugin_slug( "-target") => "plugin"
 			);
 
-			$target = force_reinstall_target_self($arguments);
+			$target = Functions::force_reinstall_target_self($arguments);
 
 			$link =  sprintf(
 				'<a href="%s">%s</a>',
 				esc_attr($target),
-				__('Force Reinstall', $this->plugin_name)
+				__('Force Reinstall', FORCE_REINSTALL_SLUG)
 			);
 
 			array_push($actions, $link);
@@ -167,20 +138,20 @@ class Force_Reinstall_Admin
 	function handle_action()
 	{
 
-		if (wp_verify_nonce(filter_input(INPUT_GET, $this->plugin_name . "-nonce"), $this->plugin_name)) {
+		if (wp_verify_nonce(filter_input(INPUT_GET, Functions::get_plugin_slug( "-nonce")), FORCE_REINSTALL_SLUG)) {
 
-			switch (filter_input(INPUT_GET, $this->plugin_name . "-target")) {
+			switch (filter_input(INPUT_GET, Functions::get_plugin_slug( "-target"))) {
 				case "plugin":
 				case "theme":
 
-					$target =	filter_input(INPUT_GET, $this->plugin_name);
+					$target =	filter_input(INPUT_GET, FORCE_REINSTALL_SLUG);
 
 					if ($target) {
 
 						$this->_force_update($target);
 
 						//remove our args and redirect
-						wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
+						wp_redirect(remove_query_arg(array("action", Functions::get_plugin_slug( "-nonce"), FORCE_REINSTALL_SLUG, Functions::get_plugin_slug( "-target")), $_SERVER['REQUEST_URI']));
 						exit;
 					}
 					break;
@@ -238,7 +209,7 @@ class Force_Reinstall_Admin
 
 		//https://developer.wordpress.org/reference/hooks/handle_bulk_actions-screen/
 		if (version_compare($wp_version, "4.7", ">=")) {
-			$actions[$this->plugin_name] = __('Force Reinstall', $this->plugin_name);
+			$actions[FORCE_REINSTALL_SLUG] = __('Force Reinstall', FORCE_REINSTALL_SLUG);
 		}
 		return $actions;
 	}
@@ -256,7 +227,7 @@ class Force_Reinstall_Admin
 	public function plugins_bulk_update($redirect, $action, $plugins)
 	{
 
-		if ($action == $this->plugin_name) {
+		if ($action == FORCE_REINSTALL_SLUG) {
 
 			foreach ($plugins as $plugin) {
 				$this->_force_update($plugin);
@@ -278,11 +249,12 @@ class Force_Reinstall_Admin
 		/**
 		 * Request Rating
 		 */
-		if (boolval(get_transient($this->plugin_name . "-rate")) === false) {
-			wp_enqueue_script($this->plugin_name . "-rate");
-			wp_enqueue_style($this->plugin_name . "-rate");
+		if (boolval(get_transient(Functions::get_plugin_slug( "-rate"))) === false) {
+			wp_enqueue_script(Functions::get_plugin_slug( "-rate"));
+			wp_enqueue_style(Functions::get_plugin_slug( "-rate"));
 
-			include plugin_dir_path(__FILE__) . "partials/force-reinstall-admin-rating.php";
+			echo Functions::get_template( Functions::get_plugin_slug( '-admin-rating'), array(), 'admin-rating.php' );
 		}
 	}
+
 }

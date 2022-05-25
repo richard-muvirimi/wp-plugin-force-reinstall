@@ -4,12 +4,12 @@
   $(document).ready(function () {
     $(
       "." +
-        window.force_reinstall.name +
-        " a.btn-rate, ." +
-        window.force_reinstall.name +
-        " a.btn-remind, ." +
-        window.force_reinstall.name +
-        " a.btn-cancel"
+      window.force_reinstall.name +
+      " a.btn-rate, ." +
+      window.force_reinstall.name +
+      " a.btn-remind, ." +
+      window.force_reinstall.name +
+      " a.btn-cancel"
     ).click(function (e) {
       e.preventDefault();
 
