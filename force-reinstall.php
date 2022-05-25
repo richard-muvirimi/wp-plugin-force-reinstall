@@ -11,7 +11,7 @@
  * Plugin Name:       Force Reinstall
  * Plugin URI:        https://tyganeutronics.com/force-reinstall
  * Description:       Easily force a Plugin or Theme reinstall from WordPress.org
- * Version:           1.1.0
+ * Version:           1.0.4
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
   /**
    * Plugin version number
    */
-  define( 'FORCE_REINSTALL_VERSION', '1.1.0' );
+  define( 'FORCE_REINSTALL_VERSION', '1.0.4' );
 
   /**
    * Reference to this file, and this file only, (well, plugin entry point)
