@@ -25,7 +25,7 @@ jobs:
       with:
         dev: yes
         php_version: "5.6"
-        version: 2.2.x
+        version: 1.x
         command: update
         
     - name: Run Tests
