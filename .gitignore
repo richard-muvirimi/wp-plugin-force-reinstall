@@ -1,7 +1,6 @@
 *.code-workspace
 composer.lock
 /vendor/
-rsync.sh
 
 #Docker
 docker_tag
