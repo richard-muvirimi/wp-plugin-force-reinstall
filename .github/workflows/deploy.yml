@@ -22,9 +22,10 @@ jobs:
         
     - name: Create tests dir
       run: |
+        mkdir build
+        mv . build/
         ls -la
-        mkdir "tests"
-        mkdir "src"
+        exit(2)
       
     - name: Composer Setup
       uses: php-actions/composer@v6
@@ -32,11 +33,10 @@ jobs:
         dev: yes
         php_version: "7.4"
         version: latest
-        args: --working-dir="tests"
         command: update
         
     - name: Run Tests
-      run: composer --working-dir="tests" phpcs
+      run: composer phpcs
       
     - name: Cleanup dev dependencies
       run: |
