@@ -24,12 +24,9 @@ jobs:
       uses: php-actions/composer@v6
       with:
         dev: yes
-        php_version: "5.6"
-        version: 2.2.x
-        command: self-update
-        
-    - name: Update Dependencies
-      run: composer update
+        php_version: "7.4"
+        version: latest
+        command: update
         
     - name: Run Tests
       run: composer phpcs
