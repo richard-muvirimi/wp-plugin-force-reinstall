@@ -34,17 +34,17 @@ jobs:
       run:
         echo "STABLE_TAG=$(find . -iname README.TXT -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
       
-    - name: Move to build dir
+    - name: Copy to build dir
       run: |
         mkdir build
-        rsync -rvt --delete --exclude-from='.gitignore' --exclude '.git*' ./ build/
+        rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' --exclude 'build' ./ build/
       
-    #- name: WordPress Plugin Deploy
-      #id: deploy
-      #uses: 10up/action-wordpress-plugin-deploy@stable
-      #env:
-        #SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        #SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        #SLUG: force-reinstall
-        #VERSION: ${{ env.STABLE_TAG }}
-        #BUILD_DIR: build
+    - name: WordPress Plugin Deploy
+      id: deploy
+      uses: 10up/action-wordpress-plugin-deploy@stable
+      env:
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SLUG: force-reinstall
+        VERSION: ${{ env.STABLE_TAG }}
+        BUILD_DIR: build
