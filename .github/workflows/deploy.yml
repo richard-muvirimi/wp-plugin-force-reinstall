@@ -19,6 +19,11 @@ jobs:
       with:
         path: /tmp/composer-cache
         key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+        
+    - name: Create tests dir
+      run: |
+        mkdir "tests"
+        mkdir "src"
       
     - name: Composer Setup
       uses: php-actions/composer@v6
@@ -26,26 +31,25 @@ jobs:
         dev: yes
         php_version: "7.4"
         version: latest
+        args: --working-dir="tests"
         command: update
         
     - name: Run Tests
-      run: composer phpcs
+      run: composer --working-dir="tests" phpcs
       
     - name: Cleanup dev dependencies
       run: |
-        rm -rf vendor composer.lock
-        composer install --no-dev --optimize-autoloader
+        composer --working-dir="tests" install --no-dev --optimize-autoloader
       
     - name: Extract Version
       run: echo "STABLE_TAG=$(find . -iname "README.TXT" -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
       
     - name: Move to build dir
       run: |
-        mkdir "src"
-        mv ./ src/
         mkdir "build"
         rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' src/ build/
         rm -rf src
+        rm -rf tests
         ls -la
       
     #- name: WordPress Plugin Deploy
