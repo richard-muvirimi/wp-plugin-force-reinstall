@@ -12,20 +12,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout build
+      uses: actions/checkout@v3
       with:
         path: build
+        
+    - name: Checkout tests
+      uses: actions/checkout@v3
+      with:
+        path: tests
     
     - name: Cache Composer dependencies
       uses: actions/cache@v2
       with:
         path: /tmp/composer-cache
         key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-        
-    - name: Create tests dir
-      run: |
-        mkdir "$GIT_WORKSPACE/tests/"
-        cp "$GIT_WORKSPACE/build/" "$GIT_WORKSPACE/tests/"
       
     - name: Composer Setup
       uses: php-actions/composer@v6
