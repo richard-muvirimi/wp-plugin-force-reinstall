@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        path: build
     
     - name: Cache Composer dependencies
       uses: actions/cache@v2
@@ -22,8 +24,6 @@ jobs:
         
     - name: Create tests dir
       run: |
-        mkdir build
-        mv ./ build/
         ls -la
         exit(2)
       
