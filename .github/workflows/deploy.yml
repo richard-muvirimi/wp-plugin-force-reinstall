@@ -12,7 +12,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout build
+      uses: actions/checkout@v3
     
     - name: Cache Composer dependencies
       uses: actions/cache@v2
@@ -26,27 +27,17 @@ jobs:
         dev: yes
         php_version: "7.4"
         version: latest
-        command: update
-        
-    - name: Run Tests
-      run: composer phpcs
-      
-    - name: Cleanup dev dependencies
-      run: |
-        rm -rf vendor composer.lock
-        composer install --no-dev --optimize-autoloader
+        args: --no-dev --optimize-autoloader
+        command: install
       
     - name: Extract Version
-      run: echo "STABLE_TAG=$(find . -iname "README.TXT" -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
+      run:
+        echo "STABLE_TAG=$(find . -iname README.TXT -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
       
     - name: Move to build dir
       run: |
-        mkdir "src"
-        mv ./ src/
-        mkdir "build"
-        rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' src/ build/
-        rm -rf src
-        ls -la
+        mkdir build
+        rsync -rvt --delete --exclude-from='.gitignore' --exclude '.git*' ./ build/
       
     #- name: WordPress Plugin Deploy
       #id: deploy
