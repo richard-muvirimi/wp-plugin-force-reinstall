@@ -27,10 +27,6 @@ jobs:
       with:
         path: /tmp/composer-cache
         key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-        
-    - name: Test environment
-      run: |
-        cd tests
       
     - name: Composer Setup
       uses: php-actions/composer@v6
@@ -38,23 +34,19 @@ jobs:
         dev: yes
         php_version: "7.4"
         version: latest
+        args: --working-dir="$GITHUB_WORKSPACE/tests/"
         command: update
         
     - name: Run Tests
       run: composer phpcs
       
-    - name: Build environment
-      run: |
-        cd ../build
-      
     - name: Install dev dependencies
       run: |
-        composer install --no-dev --optimize-autoloader
+        composer --working-dir="$GITHUB_WORKSPACE/build/" install --no-dev --optimize-autoloader
       
     - name: Extract Version
       run:
-        echo "STABLE_TAG=$(find . -iname "README.TXT" -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
-        cd ../
+        echo "STABLE_TAG=$(find . -iname README.TXT -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \; $GITHUB_WORKSPACE/build/)" >> $GITHUB_ENV
       
     - name: Move to build dir
       run: |
