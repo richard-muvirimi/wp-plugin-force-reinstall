@@ -36,7 +36,8 @@ jobs:
       
     - name: Move to build dir
       run: |
-        echo ${{ env.STABLE_TAG }}
+        mkdir build
+        rsync -rvt --delete --exclude-from='.gitignore' --exclude '.git*' ./ build/
       
     #- name: WordPress Plugin Deploy
       #id: deploy
