@@ -23,7 +23,7 @@ jobs:
     - name: Create tests dir
       run: |
         mkdir build
-        mv . build/
+        mv ./ build/
         ls -la
         exit(2)
       
