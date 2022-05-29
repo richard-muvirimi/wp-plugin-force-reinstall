@@ -24,8 +24,8 @@ jobs:
         
     - name: Create tests dir
       run: |
-        ls -la
-        exit(2)
+        mkdir "$GIT_WORKSPACE/tests/"
+        cp "$GIT_WORKSPACE/build/" "$GIT_WORKSPACE/tests/"
       
     - name: Composer Setup
       uses: php-actions/composer@v6
@@ -33,24 +33,24 @@ jobs:
         dev: yes
         php_version: "7.4"
         version: latest
+        args: --working-dir="$GIT_WORKSPACE/tests"
         command: update
         
     - name: Run Tests
-      run: composer phpcs
+      run: composer --working-dir="$GIT_WORKSPACE/tests" phpcs
       
-    - name: Cleanup dev dependencies
+    - name: Install dev dependencies
       run: |
-        composer --working-dir="tests" install --no-dev --optimize-autoloader
+        composer --working-dir="$GIT_WORKSPACE/build" install --no-dev --optimize-autoloader
       
     - name: Extract Version
-      run: echo "STABLE_TAG=$(find . -iname "README.TXT" -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
+      run:
+        cd "$GIT_WORKSPACE/build"
+        echo "STABLE_TAG=$(find . -iname "README.TXT" -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
+        cd ../
       
     - name: Move to build dir
       run: |
-        mkdir "build"
-        rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' src/ build/
-        rm -rf src
-        rm -rf tests
         ls -la
       
     #- name: WordPress Plugin Deploy
