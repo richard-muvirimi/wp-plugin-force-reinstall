@@ -1,12 +1,12 @@
 === Force Reinstall ===
 Contributors: tygalive
-Donate link: https://tyganeutronics.com
+Donate link: [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 Tags: plugin, theme, install, update, corrupted, fix, reinstall, redo
 Requires at least: 4.0
 Tested up to: 6.0
 Stable tag: 1.0.4
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: [GPL - 2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
 Easily force a Plugin or Theme reinstall from WordPress.org
 
