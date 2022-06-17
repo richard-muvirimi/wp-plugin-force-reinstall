@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Force Reinstall
- * Plugin URI:        https://tyganeutronics.com/force-reinstall
+ * Plugin URI:        https://tyganeutronics.com
  * Description:       Easily force a Plugin or Theme reinstall from WordPress.org
  * Version:           1.0.4
  * Author:            Tyganeutronics
