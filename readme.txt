@@ -1,10 +1,10 @@
 === Force Reinstall ===
 Contributors: tygalive
-Donate link: https://tyganeutronics.com
+Donate link: http://richard.co.zw
 Tags: plugin, theme, install, update, corrupted, fix, reinstall, redo
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,7 +58,7 @@ No. This will just effectively force WordPress to replace plugin or theme files 
 
 == Changelog ==
 
-= 1.0.2 - 1.0.4 =
+= 1.0.2 - 1.0.5 =
 * Minor Bug Fixes
 
 = 1.0.1 =

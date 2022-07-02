@@ -3,17 +3,17 @@
 /**
  * The plugin bootstrap file
  *
- * @link              https://tyganeutronics.com
+ * @link              http://richard.co.zw
  * @since             1.0.0
  * @package           Force_Reinstall
  *
  * @wordpress-plugin
  * Plugin Name:       Force Reinstall
- * Plugin URI:        https://tyganeutronics.com/force-reinstall
+ * Plugin URI:        https://github.com/richard-muvirimi/wp-plugin-force-reinstall
  * Description:       Easily force a Plugin or Theme reinstall from WordPress.org
- * Version:           1.0.4
- * Author:            Tyganeutronics
- * Author URI:        https://tyganeutronics.com
+ * Version:           1.0.5
+ * Author:            Richard Muvirimi
+ * Author URI:        http://richard.co.zw
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       force-reinstall
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
   /**
    * Plugin version number
    */
-  define( 'FORCE_REINSTALL_VERSION', '1.0.4' );
+  define( 'FORCE_REINSTALL_VERSION', '1.0.5' );
 
   /**
    * Reference to this file, and this file only, (well, plugin entry point)
