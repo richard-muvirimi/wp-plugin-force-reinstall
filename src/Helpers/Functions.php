@@ -26,13 +26,24 @@ namespace Rich4rdMuvirimi\ForceReinstall\Helpers;
 class Functions {
 
 	/**
+	 * URL separator character
+	 *
+	 * @var string
+	 *
+	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+	 * @since 1.0.6
+	 * @version 1.0.6
+	 */
+	public static $URL_SEPARATOR = "/";
+
+	/**
 	 * Get unique plugin slug
 	 *
 	 * @param string $suffix
 	 *
 	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
-	 * @since 1.3.0
-	 * @version 1.3.0
+	 * @since 1.0.3
+	 * @version 1.0.6
 	 *
 	 * @return string
 	 */
@@ -101,7 +112,7 @@ class Functions {
 	 * @return string
 	 */
 	public static function get_views_path( $path ) {
-		return plugin_dir_path( FORCE_REINSTALL_FILE ) . 'src' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . ltrim( $path, '\\/' );
+		return plugin_dir_path( FORCE_REINSTALL_FILE ) . 'src' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR  . ltrim( $path, '\\/' );
 	}
 
 	/**
@@ -116,7 +127,7 @@ class Functions {
 	 * @return string
 	 */
 	public static function get_script_path( $path ) {
-		return self::get_views_path( 'js' . DIRECTORY_SEPARATOR . $path );
+		return self::get_views_path( 'js' . DIRECTORY_SEPARATOR  . $path );
 	}
 
 	/**
@@ -131,7 +142,7 @@ class Functions {
 	 * @return string
 	 */
 	public static function get_style_path( $path ) {
-		return self::get_views_path( 'css' . DIRECTORY_SEPARATOR . $path );
+		return self::get_views_path( 'css' . DIRECTORY_SEPARATOR  . $path );
 	}
 	
 	/**
@@ -141,12 +152,12 @@ class Functions {
 	 *
 	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
 	 * @since 1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.6
 	 *
 	 * @return string
 	 */
 	public static function get_views_url( $url ) {
-		return plugin_dir_url( FORCE_REINSTALL_FILE ) . 'src' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . ltrim( $url, '\\/' );
+		return plugin_dir_url( FORCE_REINSTALL_FILE ) . 'src/Views' . self::$URL_SEPARATOR  . ltrim( $url, '\\/' );
 	}
 
 	/**
@@ -156,12 +167,12 @@ class Functions {
 	 *
 	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
 	 * @since 1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.6
 	 *
 	 * @return string
 	 */
 	public static function get_script_url( $url ) {
-		return self::get_views_url( 'js' . DIRECTORY_SEPARATOR . $url );
+		return self::get_views_url( 'js' . self::$URL_SEPARATOR  . $url );
 	}
 
 	/**
@@ -171,12 +182,12 @@ class Functions {
 	 *
 	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
 	 * @since 1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.6
 	 *
 	 * @return string
 	 */
 	public static function get_style_url( $url ) {
-		return self::get_views_url( 'css' . DIRECTORY_SEPARATOR . $url );
+		return self::get_views_url( 'css' . self::$URL_SEPARATOR  . $url );
 	}
 
 }
