@@ -62,8 +62,8 @@ class ForceReinstall {
 	 */
 	public static function instance() {
 
-		if ( ! ( self::$instance instanceof ForceReinstall ) ) {
-			self::$instance = new ForceReinstall();
+		if ( ! ( self::$instance instanceof static ) ) {
+			self::$instance = new static();
 		}
 		return self::$instance;
 	}
@@ -167,7 +167,7 @@ class ForceReinstall {
 	 * Allows us to hook the functions to this class so that we have a unified api
 	 *
 	 * @since 1.0.0
-	 * @version 1.0.2
+	 * @version 1.0.5
 	 * @param string $name Name of function to call.
 	 * @param array  $arguments Arguments passed to function.
 	 * @return mixed #type intentionally left out.
@@ -188,7 +188,7 @@ class ForceReinstall {
 
 				// Function to call.
 				$component = array_shift( $arguments );
-				if ( is_array( $component ) || is_string( $component ) ) {
+				if ( is_array( $component ) || ( is_string( $component ) && is_callable($component) )) {
 					$callable = $component;
 				} else {
 					$callable = array( $component, array_shift( $arguments ) );
@@ -209,7 +209,7 @@ class ForceReinstall {
 
 				// Function to call.
 				$component = array_shift( $arguments );
-				if ( is_array( $component ) || is_string( $component ) ) {
+				if ( is_array( $component ) || ( is_string( $component ) && is_callable($component) )) {
 					$callable = $component;
 				} else {
 					$callable = array( $component, array_shift( $arguments ) );

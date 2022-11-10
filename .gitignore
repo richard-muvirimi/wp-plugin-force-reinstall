@@ -1,4 +1,9 @@
 *.code-workspace
 composer.lock
 /vendor/
-rsync.sh
+
+#Docker
+docker_tag
+Dockerfile-php-build
+DOCKER_ENV
+output.log
