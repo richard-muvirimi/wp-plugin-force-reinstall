@@ -5,7 +5,7 @@
 - **_Tags:_** plugin, theme, install, update, corrupted, fix, reinstall, redo
 - **_Requires at least:_** 4.0
 - **_Tested up to:_** 6.1
-- **_Stable tag:_** 1.1.0
+- **_Stable tag:_** 1.1.1
 - **_License:_** GPLv2 or later
 - **_License URI:_** [GPL - 2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -54,7 +54,7 @@ In the search field, type "Force Reinstall," and click on "Search Plugins." Once
 
 ## Changelog
 
-**_ 1.1.0 _**
+**_ 1.1.0 - 1.1.1 _**
 
 - Set minimum supported version to 7.3.
 - Allow opting in to usage analytics collection.

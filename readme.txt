@@ -64,7 +64,7 @@ No, your data will not be affected. The Force Reinstall option only replaces the
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.1.0 - 1.1.1 =
 * Set minimum supported version to 7.3.
 * Allow opting in to usage analytics collection.
 
