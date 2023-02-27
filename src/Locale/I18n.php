@@ -22,17 +22,19 @@ namespace Rich4rdMuvirimi\ForceReinstall\Locale;
  * @since 1.0.0
  * @version 1.0.0
  */
-class I18n {
+class I18n
+{
 
 
-	/**
-	 * Load the plugin translation files
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public function load_plugin_textdomain() {
-		load_plugin_textdomain( FORCE_REINSTALL_SLUG, false, plugin_dir_path( FORCE_REINSTALL_FILE ) . 'languages' );
-	}
+    /**
+     * Load the plugin translation files
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public function load_plugin_textdomain()
+    {
+        load_plugin_textdomain(FORCE_REINSTALL_SLUG, false, plugin_dir_path(FORCE_REINSTALL_FILE) . 'languages');
+    }
 }

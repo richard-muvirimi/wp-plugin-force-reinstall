@@ -13,6 +13,8 @@
 namespace Rich4rdMuvirimi\ForceReinstall\Controller;
 
 use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Logger;
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Template;
 
 /**
  * Admin side controller
@@ -24,237 +26,365 @@ use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
  * @since 1.0.0
  * @version 1.0.1
  */
-class Admin extends BaseController {
+class Admin extends BaseController
+{
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 * @return void
-	 */
-	public function enqueue_styles()
-	{
-		wp_register_style(Functions::get_plugin_slug( "-rate"),Functions::get_style_url('admin-rating.css'), array(), FORCE_REINSTALL_VERSION, 'all');
-	}
+    /**
+     * Register the stylesheets for the admin area.
+     *
+     * @return void
+     * @since    1.0.0
+     */
+    public function enqueue_styles(): void
+    {
+        wp_register_style(Functions::get_plugin_slug("-rate"), Template::get_style_url('admin-rating.css'), array(), FORCE_REINSTALL_VERSION);
 
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 * @return void
-	 */
-	public function enqueue_scripts()
-	{
+        wp_register_style(Functions::get_plugin_slug("-about"), Template::get_style_url('admin-about.css'), array(), FORCE_REINSTALL_VERSION);
 
-		switch (get_current_screen()->id) {
-			case "themes":
+    }
 
-				/**
-				 * Would have loved a hook much like plugins but guess will have to add through javascript
-				 * 
-				 * tried "plugin_action_links" but could not be found on the front end
-				 * But then again...
-				 */
-				wp_enqueue_script(FORCE_REINSTALL_SLUG, Functions::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
-				wp_localize_script(FORCE_REINSTALL_SLUG, "force_reinstall", array(
-					"button" => $this->getThemeActionButton()
-				));
-				break;
-		}
+    /**
+     * Register the JavaScript for the admin area.
+     *
+     * @return void
+     * @since    1.0.0
+     */
+    public function enqueue_scripts(): void
+    {
 
-		wp_register_script(Functions::get_plugin_slug( "-rate"), Functions::get_script_url( 'admin-rating.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
-		wp_localize_script(Functions::get_plugin_slug( "-rate"), "force_reinstall", array(
-			"ajax_url" => admin_url('admin-ajax.php'),
-			"name" => FORCE_REINSTALL_SLUG
-		));
-	}
+        switch (get_current_screen()->id) {
+            case "themes":
 
-	/**
-	 * Get theme action button
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @return void
-	 */
-	private function getThemeActionButton()
-	{
+                /**
+                 * Would have loved a hook much like plugins but guess will have to add through javascript
+                 *
+                 * tried "plugin_action_links" but could not be found on the front end
+                 * But then again...
+                 */
+                wp_enqueue_script(FORCE_REINSTALL_SLUG, Template::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
+                wp_localize_script(FORCE_REINSTALL_SLUG, "force_reinstall", array(
+                    "button" => $this->getThemeActionButton()
+                ));
+                break;
+        }
 
-		$arguments = array(
-			FORCE_REINSTALL_SLUG => "",
-			Functions::get_plugin_slug( "-target") => "theme"
-		);
-		$target =  Functions::force_reinstall_target_self($arguments);
+        wp_register_script(Functions::get_plugin_slug("-rate"), Template::get_script_url('admin-rating.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
+        wp_localize_script(Functions::get_plugin_slug("-rate"), "force_reinstall", array(
+            "ajax_url" => admin_url('admin-ajax.php'),
+            "name" => FORCE_REINSTALL_SLUG
+        ));
+    }
 
-		return	sprintf(
-			'<a class="button %s" href="%s">%s</a>',
-			esc_attr(FORCE_REINSTALL_SLUG),
-			esc_attr($target),
-			__('Force Reinstall', FORCE_REINSTALL_SLUG)
-		);
-	}
+    /**
+     * Get theme action button
+     *
+     * @return string
+     * @version 1.0.1
+     * @since 1.0.0
+     */
+    private function getThemeActionButton(): string
+    {
 
-	/**
-	 * Add plugins page actions
-	 * 
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @param array $actions
-	 * @param string $plugin_file
-	 * @param array $plugin_data
-	 * @return array
-	 */
-	function plugin_action_links($actions, $plugin_file, $plugin_data)
-	{
+        $arguments = array(
+            FORCE_REINSTALL_SLUG => "",
+            Functions::get_plugin_slug("-target") => "theme"
+        );
+        $target = Functions::force_reinstall_target_self($arguments);
 
-		if ((isset($plugin_data["url"]) && strlen($plugin_data["url"]) != 0) &&  (isset($plugin_data["package"]) && strlen($plugin_data["package"]) != 0)) {
+        return sprintf(
+            '<a class="button %s" href="%s">%s</a>',
+            esc_attr(FORCE_REINSTALL_SLUG),
+            esc_attr($target),
+            __('Force Reinstall', FORCE_REINSTALL_SLUG)
+        );
+    }
 
-			//target same page with plugin name to keep arguments
-			$arguments = 				array(
-				FORCE_REINSTALL_SLUG => $plugin_file,
-				Functions::get_plugin_slug( "-target") => "plugin"
-			);
+    /**
+     * Add plugins page actions
+     *
+     * @param array $actions
+     * @param string $plugin_file
+     * @param array $plugin_data
+     * @return array
+     * @since 1.0.0
+     * @version 1.0.1
+     */
+    function plugin_action_links(array $actions, string $plugin_file, array $plugin_data): array
+    {
 
-			$target = Functions::force_reinstall_target_self($arguments);
+        if ((isset($plugin_data["url"]) && strlen($plugin_data["url"]) != 0) && (isset($plugin_data["package"]) && strlen($plugin_data["package"]) != 0)) {
 
-			$link =  sprintf(
-				'<a href="%s">%s</a>',
-				esc_attr($target),
-				__('Force Reinstall', FORCE_REINSTALL_SLUG)
-			);
+            //target same page with plugin name to keep arguments
+            $arguments = array(
+                FORCE_REINSTALL_SLUG => $plugin_file,
+                Functions::get_plugin_slug("-target") => "plugin"
+            );
 
-			array_push($actions, $link);
-		}
+            $target = Functions::force_reinstall_target_self($arguments);
 
-		return $actions;
-	}
+            $link = sprintf(
+                '<a href="%s">%s</a>',
+                esc_attr($target),
+                __('Force Reinstall', FORCE_REINSTALL_SLUG)
+            );
 
-	/**
-	 * Handle requested action
-	 * 
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @return void
-	 */
-	function handle_action()
-	{
+            $actions[] = $link;
+        }
 
-		if (wp_verify_nonce(filter_input(INPUT_GET, Functions::get_plugin_slug( "-nonce")), FORCE_REINSTALL_SLUG)) {
+        return $actions;
+    }
 
-			switch (filter_input(INPUT_GET, Functions::get_plugin_slug( "-target"))) {
-				case "plugin":
-				case "theme":
+    /**
+     * Handle requested action
+     *
+     * @return void
+     * @version 1.0.1
+     * @since 1.0.0
+     */
+    function handle_action(): void
+    {
 
-					$target =	filter_input(INPUT_GET, FORCE_REINSTALL_SLUG);
+        if (wp_verify_nonce(filter_input(INPUT_GET, Functions::get_plugin_slug("-nonce")), FORCE_REINSTALL_SLUG)) {
 
-					if ($target) {
+            switch (filter_input(INPUT_GET, Functions::get_plugin_slug("-target"))) {
+                case "plugin":
+                case "theme":
 
-						$this->_force_update($target);
+                    $target = filter_input(INPUT_GET, FORCE_REINSTALL_SLUG);
 
-						//remove our args and redirect
-						wp_redirect(remove_query_arg(array("action", Functions::get_plugin_slug( "-nonce"), FORCE_REINSTALL_SLUG, Functions::get_plugin_slug( "-target")), $_SERVER['REQUEST_URI']));
-						exit;
-					}
-					break;
-				default:
-			}
-		}
-	}
+                    if ($target) {
 
-	/**
-	 * Force an update on requested item
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @param string $target
-	 * @return void
-	 */
-	private function _force_update($target)
-	{
-		/**
-		 * Modify Site transient
-		 */
-		$updates =  get_site_transient('update_' . get_current_screen()->base);
+                        $this->_force_update($target);
 
-		//check if we don't already need an update or can be...
-		if (isset($updates->no_update[$target])) {
+                        //remove our args and redirect
+                        wp_redirect(remove_query_arg(array("action", Functions::get_plugin_slug("-nonce"), FORCE_REINSTALL_SLUG, Functions::get_plugin_slug("-target")), $_SERVER['REQUEST_URI']));
+                        exit;
+                    }
+                    break;
+                default:
+            }
+        }
+    }
 
-			$item = $updates->no_update[$target];
+    /**
+     * Force an update on requested item
+     *
+     * @param string $target
+     * @return void
+     * @since 1.0.0
+     * @version 1.0.1
+     */
+    private function _force_update(string $target): void
+    {
+        /**
+         * Modify Site transient
+         */
+        $updates = get_site_transient('update_' . get_current_screen()->base);
 
-			//remove from no_updates
-			unset($updates->no_update[$target]);
+        //check if we don't already need an update or can be...
+        if (isset($updates->no_update[$target])) {
 
-			//add to updates
-			$updates->response[$target] = $item;
+            $item = $updates->no_update[$target];
 
-			//stall update checking
-			$updates->last_checked = time();
+            //remove from no_updates
+            unset($updates->no_update[$target]);
 
-			//save
-			set_site_transient('update_' . get_current_screen()->base, $updates);
-		}
-	}
+            //add to updates
+            $updates->response[$target] = $item;
 
-	/**
-	 * Add Plugins bulk action
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @param array $actions
-	 * @return array
-	 */
-	public function add_plugins_bulk_action($actions)
-	{
+            //stall update checking
+            $updates->last_checked = time();
 
-		global $wp_version;
+            //save
+            set_site_transient('update_' . get_current_screen()->base, $updates);
+        }
+    }
 
-		//https://developer.wordpress.org/reference/hooks/handle_bulk_actions-screen/
-		if (version_compare($wp_version, "4.7", ">=")) {
-			$actions[FORCE_REINSTALL_SLUG] = __('Force Reinstall', FORCE_REINSTALL_SLUG);
-		}
-		return $actions;
-	}
+    /**
+     * Add Plugins bulk action
+     *
+     * @param array $actions
+     * @return array
+     * @since 1.0.0
+     * @version 1.0.1
+     */
+    public function add_plugins_bulk_action(array $actions): array
+    {
 
-	/**
-	 * Force update on plugins
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @param string $redirect
-	 * @param string $action
-	 * @param array $plugins
-	 * @return string
-	 */
-	public function plugins_bulk_update($redirect, $action, $plugins)
-	{
+        global $wp_version;
 
-		if ($action == FORCE_REINSTALL_SLUG) {
+        //https://developer.wordpress.org/reference/hooks/handle_bulk_actions-screen/
+        if (version_compare($wp_version, "4.7", ">=")) {
+            $actions[FORCE_REINSTALL_SLUG] = __('Force Reinstall', FORCE_REINSTALL_SLUG);
+        }
+        return $actions;
+    }
 
-			foreach ($plugins as $plugin) {
-				$this->_force_update($plugin);
-			}
-		}
+    /**
+     * Force update on plugins
+     *
+     * @param string $redirect
+     * @param string $action
+     * @param array $plugins
+     * @return string
+     * @since 1.0.0
+     * @version 1.0.1
+     */
+    public function plugins_bulk_update(string $redirect, string $action, array $plugins): string
+    {
 
-		return admin_url("update-core.php");
-	}
+        if ($action == FORCE_REINSTALL_SLUG) {
 
-	/**
-	 * Show rating request
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.1
-	 * @return void
-	 */
-	public function show_rating()
-	{
-		/**
-		 * Request Rating
-		 */
-		if (boolval(get_transient(Functions::get_plugin_slug( "-rate"))) === false) {
-			wp_enqueue_script(Functions::get_plugin_slug( "-rate"));
-			wp_enqueue_style(Functions::get_plugin_slug( "-rate"));
+            foreach ($plugins as $plugin) {
+                $this->_force_update($plugin);
+            }
+        }
 
-			echo Functions::get_template( Functions::get_plugin_slug( '-admin-rating'), array(), 'admin-rating.php' );
-		}
-	}
+        return admin_url("update-core.php");
+    }
+
+    /**
+     * Show rating request
+     *
+     * @return void
+     * @version 1.0.1
+     * @since 1.0.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function showAdminNotices(): void
+    {
+        /**
+         * Request Rating
+         */
+        if (boolval(get_transient(Functions::get_plugin_slug("-rate"))) === false) {
+            wp_enqueue_script(Functions::get_plugin_slug("-rate"));
+            wp_enqueue_style(Functions::get_plugin_slug("-rate"));
+
+            echo Template::get_template(Functions::get_plugin_slug('-admin-notice-rating'), array(), 'admin-notice-rating.php');
+
+            Logger::logEvent("request_plugin_rating");
+        }
+
+        if (get_option(Functions::get_plugin_slug("-analytics"), "off") !== "on" && boolval(get_transient(Functions::get_plugin_slug('-analytics'))) === false) {
+            wp_enqueue_script(Functions::get_plugin_slug("-rate"));
+            wp_enqueue_style(Functions::get_plugin_slug("-rate"));
+
+            echo Template::get_template(Functions::get_plugin_slug('-admin-notice-analytics'), array(), 'admin-notice-analytics.php');
+
+            Logger::logEvent("request_plugin_analytics");
+        }
+    }
+
+    /**
+     * Register plugin options
+     *
+     * @return void
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @since 1.5.0
+     * @version 1.5.0
+     */
+    public function registerOptions(): void
+    {
+
+        register_setting(
+            Functions::get_plugin_slug("-about"),
+            Functions::get_plugin_slug("-analytics"),
+            array("sanitize_callback" => "sanitize_text_field")
+        );
+
+        add_settings_section(
+            Functions::get_plugin_slug("-settings"),
+            __("Settings", Functions::get_plugin_slug()),
+            array($this, "renderSectionHeader"),
+            Functions::get_plugin_slug("-about")
+        );
+
+        add_settings_field(
+            Functions::get_plugin_slug("-analytics"),
+            __('Collect Anonymous Usage Data', FORCE_REINSTALL_SLUG),
+            array($this, 'renderInputField'),
+            Functions::get_plugin_slug("-about"),
+            Functions::get_plugin_slug("-settings"),
+            array(
+                'label_for' => Functions::get_plugin_slug("-analytics"),
+                'class' => FORCE_REINSTALL_SLUG . '-row',
+                "value" => get_option(Functions::get_plugin_slug("-analytics"), "off"),
+                'description' => Template::get_template(Functions::get_plugin_slug("-about-analytics-disclaimer"), [], "about-analytics-disclaimer.php"),
+                "type" => "checkbox",
+            )
+        );
+    }
+
+    /**
+     * Display the chaturbate header
+     *
+     * @return void
+     * @since 1.5.0
+     * @version 1.5.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function renderSectionHeader(): void
+    {
+        echo Template::get_template(Functions::get_plugin_slug("-about-section-header"), [], "about-section-header.php");
+    }
+
+    /**
+     * Display input field
+     *
+     * @param array $args
+     *
+     * @return void
+     * @since 1.0.0
+     * @version 1.0.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function renderInputField(array $args): void
+    {
+        echo Template::get_template(Functions::get_plugin_slug("-about-input-field"), $args, "about-input-field.php");
+    }
+
+    /**
+     * On create the about menu
+     *
+     * @since 1.0.0
+     */
+    public function on_admin_menu()
+    {
+        add_menu_page(
+            __('Force Reinstall', FORCE_REINSTALL_SLUG),
+            __('Force Reinstall', FORCE_REINSTALL_SLUG),
+            'manage_options',
+            Functions::get_plugin_slug(),
+            [$this, 'renderAboutPage'],
+            Template::get_image_url('logo.svg')
+        );
+
+    }
+
+    /**
+     * Render the about page
+     *
+     * @return void
+     * @since 1.5.0
+     * @version 1.5.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function renderAboutPage(): void
+    {
+
+        Logger::logEvent("view_about_page");
+
+        wp_enqueue_style(Functions::get_plugin_slug("-about"));
+
+        $plugin = get_plugin_data(
+            FORCE_REINSTALL_FILE
+        );
+
+        echo Template::get_template(Functions::get_plugin_slug("admin-about"), compact("plugin"), "admin-about.php");
+    }
 
 }

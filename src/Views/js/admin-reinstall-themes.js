@@ -1,53 +1,56 @@
 (function ($) {
-  "use strict";
+    "use strict";
 
-  $(window).load(function () {
-    //$(document).ready(function () {
-    //setup
+    $(window).load(function () {
+        //$(document).ready(function () {
+        //setup
 
-    $(".theme[data-slug]")
-      //.filter(":not(:has(div.theme-id-container > h2 > span))") //is active theme
-      .filter(":not(:has(div.update-message))") //only when not needing an update
-      .each(function () {
-        let element = $(window.force_reinstall.button);
+        $(".theme[data-slug]")
+            //.filter(":not(:has(div.theme-id-container > h2 > span))") //is active theme
+            .filter(":not(:has(div.update-message))") //only when not needing an update
+            .each(function (index, target) {
+                const element = $(window["force_reinstall"].button);
 
-        //https://stackoverflow.com/a/39620299/5956589
-        let url = new URL(element.attr("href"));
-        url.searchParams.set("force-reinstall", $(this).data("slug"));
+                //https://stackoverflow.com/a/39620299/5956589
+                let url = new URL(element.attr("href"));
+                url.searchParams.set("force-reinstall", $(target).data("slug"));
 
-        element.attr("href", url.href);
+                element.attr("href", url.href);
 
-        $(this).find(".theme-actions").prepend(element);
-      });
+                $(target).find(".theme-actions").prepend(element);
+            });
 
-    let obs = new MutationObserver(function () {
-      $(".theme-wrap")
-        .filter(":not(:has(a.force-reinstall))") //not already added
-        .filter(
-          ":not(:has(div.theme-info div.notice a[href*='action=upgrade-theme']))" //target notice with upgrade theme notice
-        )
-        .each(function () {
-          let element = $(window.force_reinstall.button);
+        let obs = new MutationObserver(function () {
+            $(".theme-wrap")
+                .filter(":not(:has(a.force-reinstall))") //not already added
+                .filter(
+                    ":not(:has(div.theme-info div.notice a[href*='action=upgrade-theme']))" //target notice with upgrade theme notice
+                )
+                .each(function (index, target) {
+                    const element = $(window["force_reinstall"].button);
 
-          //get id
-          //https://stackoverflow.com/a/39620299/5956589
-          let params = new URLSearchParams(new URL(window.location).search);
+                    const url = new URL(element.attr("href"));
 
-          element.attr(
-            "href",
-            element.attr("href") +
-              params.get("theme") +
-              (params.toString().length != 0 ? "&" + params.toString() : "")
-          );
+                    //get id
+                    //https://stackoverflow.com/a/39620299/5956589
+                    let params = new URL(window.location).searchParams;
 
-          $(this).find(".theme-actions > div").prepend(element);
+                    params.forEach(function (key, value) {
+                        url.searchParams.set(key, value);
+                    });
+
+                    url.searchParams.set("force-reinstall", params.get("theme"));
+
+                    element.attr("href", url.href);
+
+                    $(target).find(".theme-actions > div").prepend(element);
+                });
+        });
+        obs.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: false,
+            characterData: false,
         });
     });
-    obs.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: false,
-      characterData: false,
-    });
-  });
 })(jQuery);

@@ -14,8 +14,6 @@
 
 namespace Rich4rdMuvirimi\ForceReinstall\Controller;
 
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
-
 /**
  * Site side controller
  *
@@ -26,7 +24,8 @@ use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
  * @since 1.0.0
  * @version 1.0.2
  */
-class Site extends BaseController {
+class Site extends BaseController
+{
 
 
 }

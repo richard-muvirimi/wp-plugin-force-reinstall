@@ -5,13 +5,13 @@
  *
  * @link              http://richard.co.zw
  * @since             1.0.0
- * @package           Force_Reinstall
+ * @package           ForceReinstall
  *
  * @wordpress-plugin
  * Plugin Name:       Force Reinstall
  * Plugin URI:        https://github.com/richard-muvirimi/wp-plugin-force-reinstall
  * Description:       Easily force a Plugin or Theme reinstall from WordPress.org
- * Version:           1.0.6
+ * Version:           1.1.0
  * Author:            Richard Muvirimi
  * Author URI:        http://richard.co.zw
  * License:           GPL-2.0+
@@ -30,17 +30,17 @@ if ( ! defined( 'WPINC' ) ) {
  /**
   * The plugin slug, one source of truth for context
   */
-  define( 'FORCE_REINSTALL_SLUG', 'force-reinstall' );
+const FORCE_REINSTALL_SLUG = 'force-reinstall';
 
   /**
    * Plugin version number
    */
-  define( 'FORCE_REINSTALL_VERSION', '1.0.6' );
+const FORCE_REINSTALL_VERSION = '1.1.0';
 
   /**
    * Reference to this file, and this file only, (well, plugin entry point)
    */
-   define( 'FORCE_REINSTALL_FILE', __FILE__ );
+const FORCE_REINSTALL_FILE = __FILE__;
 
   /**
    * Plugin name as known to WordPress

@@ -1,0 +1,15 @@
+.force-reinstall .center {
+    text-align: center;
+}
+
+.force-reinstall {
+    margin-top: 1cm;
+}
+
+.force-reinstall input[type='checkbox'] {
+    margin-bottom: 15px;
+}
+
+.force-reinstall .wrap {
+    margin-top: 2cm;
+}

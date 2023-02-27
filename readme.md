@@ -5,7 +5,7 @@
 - **_Tags:_** plugin, theme, install, update, corrupted, fix, reinstall, redo
 - **_Requires at least:_** 4.0
 - **_Tested up to:_** 6.1
-- **_Stable tag:_** 1.0.6
+- **_Stable tag:_** 1.1.0
 - **_License:_** GPLv2 or later
 - **_License URI:_** [GPL - 2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -13,40 +13,51 @@ Easily force a Plugin or Theme reinstall from WordPress.org
 
 ## Description
 
-Ever had an update break in the middle or simply not sure if your plugins are still intact after malware removal or maybe just something else?
+The Force Reinstall plugin is a useful tool for when you need to reinstall a plugin or theme on your WordPress site. Whether you've experienced a broken update, suspect your plugins may have been affected by malware, or simply need to reset changes you've made to a plugin, this plugin can help.
 
-Then you have come across the correct plugin, just click `Force Reinstall` and plugin will set the plugin or theme as needing an update thus forcing WordPress to update the plugin or theme.
+With just one click, Force Reinstall sets the plugin or theme as needing an update, which forces WordPress to reinstall the plugin or theme. This is only a temporary setting and will be reset when you visit the updates page or update a single plugin or theme. You don't have to worry about any plugin or theme files being manipulated.
 
-This is only temporarily set and is reset when you visit the updates page or update a single plugin/theme so you don't have to worry about any plugin or theme files being manipulated
+Give the Force Reinstall plugin a try and enjoy the peace of mind that comes with knowing your plugins and themes are intact and up to date.
+
+This plugin also includes non-intrusive ads (shown only in the backend) that help support the ongoing development and maintenance of the plugin. Please see our privacy policy for information on data collection.
 
 ## Installation
 
 ### Automatic installation
 
-Automatic installation is the easiest option -- WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Force Reinstall, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
+The easiest way to install Force Reinstall is through the automatic installation option. To do this, simply log in to your WordPress dashboard, navigate to the Plugins menu, and click on "Add New."
 
-In the search field type “Force Reinstall”, then click “Search Plugins.” Once you’ve found us, you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Clicking “Install Now,” and WordPress will take it from there.
+In the search field, type "Force Reinstall," and click on "Search Plugins." Once you find our plugin, you can view details such as the rating, description, and the current version. To install the plugin, click on "Install Now," and let WordPress handle the file transfer for you.
 
 ### Manual installation
 
-1. Upload `force-reinstall.php` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+1. Download the plugin zip file from the source (such as the WordPress plugin repository).
+2. Log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
+3. Click the “Upload Plugin” button at the top of the page.
+4. Choose the plugin zip file you downloaded and click “Install Now.”
+5. Once the installation is complete, click the “Activate Plugin” button.
+6. You can now access the plugin through “Force Reinstall” option in the admin menu.
 
 ## Frequently Asked Questions
 
-#### What it if i change my mind?
+#### What if I need to reset changes made to a plugin or theme?
 
-Simple, Wordpress will refresh plugin and theme versions when you visit the updates page or update at least one.
+- You can simply use the Force Reinstall option to revert any changes made to the plugin or theme back to its original state.
 
-#### Why do some plugins/themes not have a reinstall option?
+#### Why do some plugins or themes not have the Force Reinstall option?
 
-Most probably they do not have a download link and where probably manually installed and ending up having a different link than what is available from WordPress.org
+- This is likely because the plugin or theme was not installed from WordPress.org and therefore does not have a download link available.
 
-#### Will my data be affected?
+#### Will my data be affected when I use the Force Reinstall option?
 
-No. This will just effectively force WordPress to replace plugin or theme files only, nothing else.
+- No, your data will not be affected. The Force Reinstall option only replaces the plugin or theme files and does not modify any data or settings associated with the plugin or theme.
 
 ## Changelog
+
+**_ 1.1.0 _**
+
+- Set minimum supported version to 7.3.
+- Allow opting in to usage analytics collection.
 
 **_1.0.2_ - _1.0.6_**
 

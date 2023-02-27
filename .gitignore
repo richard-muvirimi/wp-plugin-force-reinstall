@@ -7,3 +7,6 @@ docker_tag
 Dockerfile-php-build
 DOCKER_ENV
 output.log
+
+.idea
+.phpunit.result.cache

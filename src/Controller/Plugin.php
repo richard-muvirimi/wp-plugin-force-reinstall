@@ -26,43 +26,47 @@ use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
  * @since 1.0.0
  * @version 1.0.0
  */
-class Plugin extends BaseController {
+class Plugin extends BaseController
+{
 
 
-	/**
-	 * On plugin activation
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function on_activation() {
+    /**
+     * On plugin activation
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public static function on_activation(): void
+    {
 
-		if ( boolval( get_transient( Functions::get_plugin_slug( '-rate' ) ) ) === false ) {
-			set_transient( Functions::get_plugin_slug( '-rate' ), true, YEAR_IN_SECONDS / 4 );
-		}
+        if (boolval(get_transient(Functions::get_plugin_slug('-rate'))) === false) {
+            set_transient(Functions::get_plugin_slug('-rate'), true, YEAR_IN_SECONDS / 4);
+        }
 
-	}
+    }
 
-	/**
-	 * On plugin deactivation
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function on_deactivation() {
+    /**
+     * On plugin deactivation
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public static function on_deactivation(): void
+    {
 
-	}
+    }
 
-	/**
-	 * On plugin uninstall
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function on_uninstall() {
+    /**
+     * On plugin uninstall
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public static function on_uninstall(): void
+    {
 
-	}
+    }
 }
