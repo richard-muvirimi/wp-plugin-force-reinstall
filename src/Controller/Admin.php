@@ -104,12 +104,12 @@ class Admin extends BaseController
      *
      * @param array $actions
      * @param string $plugin_file
-     * @param array $plugin_data
+     * @param array|null $plugin_data
      * @return array
      * @since 1.0.0
      * @version 1.0.1
      */
-    function plugin_action_links(array $actions, string $plugin_file, array $plugin_data): array
+    function plugin_action_links(array $actions, string $plugin_file, ?array $plugin_data): array
     {
 
         if ((isset($plugin_data["url"]) && strlen($plugin_data["url"]) != 0) && (isset($plugin_data["package"]) && strlen($plugin_data["package"]) != 0)) {
