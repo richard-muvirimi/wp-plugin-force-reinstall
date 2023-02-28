@@ -37,7 +37,7 @@ if (!function_exists('register_activation_hook')) {
      * @param callable $callable
      * @return void
      */
-    function register_activation_hook(string $file, callable $callable)
+    function register_activation_hook(string $file, callable $callable): void
     {
     }
 }
@@ -49,7 +49,7 @@ if (!function_exists('register_deactivation_hook')) {
      * @param callable $callable
      * @return void
      */
-    function register_deactivation_hook(string $file, callable $callable)
+    function register_deactivation_hook(string $file, callable $callable): void
     {
     }
 }
@@ -61,7 +61,7 @@ if (!function_exists('register_uninstall_hook')) {
      * @param callable $callable
      * @return void
      */
-    function register_uninstall_hook(string $file, callable $callable)
+    function register_uninstall_hook(string $file, callable $callable): void
     {
     }
 }
