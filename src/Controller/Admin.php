@@ -61,14 +61,14 @@ class Admin extends BaseController
                  * tried "plugin_action_links" but could not be found on the front end
                  * But then again...
                  */
-                wp_enqueue_script(FORCE_REINSTALL_SLUG, Template::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
+                wp_enqueue_script(FORCE_REINSTALL_SLUG, Template::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION);
                 wp_localize_script(FORCE_REINSTALL_SLUG, "force_reinstall", array(
                     "button" => $this->getThemeActionButton()
                 ));
                 break;
         }
 
-        wp_register_script(Functions::get_plugin_slug("-rate"), Template::get_script_url('admin-rating.js'), array('jquery'), FORCE_REINSTALL_VERSION, false);
+        wp_register_script(Functions::get_plugin_slug("-rate"), Template::get_script_url('admin-rating.js'), array('jquery'), FORCE_REINSTALL_VERSION);
         wp_localize_script(Functions::get_plugin_slug("-rate"), "force_reinstall", array(
             "ajax_url" => admin_url('admin-ajax.php'),
             "name" => FORCE_REINSTALL_SLUG
@@ -317,7 +317,7 @@ class Admin extends BaseController
     }
 
     /**
-     * Display the chaturbate header
+     * Display the settings header
      *
      * @return void
      * @since 1.5.0

@@ -15,6 +15,7 @@
 namespace Rich4rdMuvirimi\ForceReinstall\Controller;
 
 use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Logger;
 
 /**
  * Plugin controller
@@ -34,7 +35,7 @@ class Plugin extends BaseController
      * On plugin activation
      *
      * @return void
-     * @version 1.0.0
+     * @version 1.1.3
      * @since 1.0.0
      */
     public static function on_activation(): void
@@ -44,29 +45,31 @@ class Plugin extends BaseController
             set_transient(Functions::get_plugin_slug('-rate'), true, YEAR_IN_SECONDS / 4);
         }
 
+        Logger::logEvent("activate_plugin");
+
     }
 
     /**
      * On plugin deactivation
      *
      * @return void
-     * @version 1.0.0
+     * @version 1.1.3
      * @since 1.0.0
      */
     public static function on_deactivation(): void
     {
-
+        Logger::logEvent("deactivate_plugin");
     }
 
     /**
      * On plugin uninstall
      *
      * @return void
-     * @version 1.0.0
+     * @version 1.1.3
      * @since 1.0.0
      */
     public static function on_uninstall(): void
     {
-
+        Logger::logEvent("uninstall_plugin");
     }
 }
