@@ -5,8 +5,12 @@
     "license": "GNU-V2",
     "autoload": {
         "psr-4": {
-            "Rich4rdMuvirimi\\ForceReinstall\\": "src/"
-        }
+            "Rich4rdMuvirimi\\ForceReinstall\\": "src/",
+            "Rich4rdMuvirimi\\ForceReinstall\\Vendor\\": "vendor/force-reinstall/psr-4"
+        },
+        "classmap": [
+            "vendor/force-reinstall/classes/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -40,6 +44,27 @@
         ],
         "test": [
             "phpunit"
+        ],
+        "mk-dependencies-dir": [
+            "@php -r \"if (!file_exists('./vendor/force-reinstall/classes')) { mkdir('./vendor/force-reinstall/classes', 0777, true); }\""
+        ],
+        "pre-install-cmd": [
+            "@mk-dependencies-dir"
+        ],
+        "pre-update-cmd": [
+            "@mk-dependencies-dir"
+        ],
+        "post-install-cmd": [
+            "@deploy"
+        ],
+        "post-update-cmd": [
+            "@deploy"
+        ],
+        "deploy": [
+            "@php -r \"copy('https://github.com/coenjacobs/mozart/releases/download/0.7.1/mozart.phar', './mozart.phar');\"",
+            "@php ./mozart.phar compose",
+            "@composer dump-autoload",
+            "@php -r \"@unlink('./mozart.phar');\""
         ]
     },
     "authors": [
@@ -67,5 +92,14 @@
         "phpunit/phpunit": "^8",
         "squizlabs/php_codesniffer": "^3.7",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    },
+    "extra": {
+        "mozart": {
+            "dep_namespace": "Rich4rdMuvirimi\\ForceReinstall\\Vendor\\",
+            "dep_directory": "/vendor/force-reinstall/psr-4/",
+            "classmap_directory": "/vendor/force-reinstall/classes/",
+            "classmap_prefix": "ForceReinstall_",
+            "delete_vendor_directories": true
+        }
     }
 }
