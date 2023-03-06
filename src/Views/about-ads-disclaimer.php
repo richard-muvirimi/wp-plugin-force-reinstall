@@ -2,6 +2,8 @@
 
 namespace Rich4rdMuvirimi\ForceReinstall\Views;
 
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.
 }
@@ -22,8 +24,8 @@ if (!defined('WPINC')) {
 
 ?>
 <span>
-    <?php _e("Our plugin relies on advertising revenue to continue development and support for our users. By displaying non-intrusive ads in the backend, we can keep our plugin free for all users and ensure its ongoing maintenance. We take care to only show ads that are relevant to our users and respect their privacy. For more information on how we collect and handle data, please refer to our", FORCE_REINSTALL_SLUG) ?>
+    <?php _e("Our plugin relies on advertising revenue to continue development and support for our users. By displaying non-intrusive ads in the backend, we can keep our plugin free for all users and ensure its ongoing maintenance. We take care to only show ads that are relevant to our users and respect their privacy. For more information on how we collect and handle data, please refer to our", Functions::get_plugin_slug()) ?>
     <a href="https://site.tyganeutronics.com/privacy-policy">
-       <?php _e("privacy policy", FORCE_REINSTALL_SLUG) ?>
+       <?php _e("privacy policy", Functions::get_plugin_slug()) ?>
     </a>.
 </span>

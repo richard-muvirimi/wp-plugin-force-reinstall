@@ -70,7 +70,7 @@ class Template
 
         $template_path = self::get_views_path($template_path);
 
-        $template_path = apply_filters(FORCE_REINSTALL_SLUG . '-template', $template_path, $template_name, $args);
+        $template_path = apply_filters(Functions::get_plugin_slug( '-template'), $template_path, $template_name, $args);
 
         extract($args);
 

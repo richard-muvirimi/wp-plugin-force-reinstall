@@ -2,6 +2,8 @@
 
 namespace Rich4rdMuvirimi\ForceReinstall\Views;
 
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+
 /**
  * Section options header
  *
@@ -16,4 +18,4 @@ namespace Rich4rdMuvirimi\ForceReinstall\Views;
 
 ?>
 
-<p><?php _e("Analytics Options", FORCE_REINSTALL_SLUG) ?></p>
+<p><?php _e("Analytics Options", Functions::get_plugin_slug()) ?></p>

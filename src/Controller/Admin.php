@@ -61,8 +61,8 @@ class Admin extends BaseController
                  * tried "plugin_action_links" but could not be found on the front end
                  * But then again...
                  */
-                wp_enqueue_script(FORCE_REINSTALL_SLUG, Template::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION);
-                wp_localize_script(FORCE_REINSTALL_SLUG, "force_reinstall", array(
+                wp_enqueue_script(Functions::get_plugin_slug(), Template::get_script_url('admin-reinstall-themes.js'), array('jquery'), FORCE_REINSTALL_VERSION);
+                wp_localize_script(Functions::get_plugin_slug(), "force_reinstall", array(
                     "button" => $this->getThemeActionButton()
                 ));
                 break;
@@ -71,7 +71,7 @@ class Admin extends BaseController
         wp_register_script(Functions::get_plugin_slug("-rate"), Template::get_script_url('admin-rating.js'), array('jquery'), FORCE_REINSTALL_VERSION);
         wp_localize_script(Functions::get_plugin_slug("-rate"), "force_reinstall", array(
             "ajax_url" => admin_url('admin-ajax.php'),
-            "name" => FORCE_REINSTALL_SLUG
+            "name" => Functions::get_plugin_slug()
         ));
     }
 
@@ -86,16 +86,16 @@ class Admin extends BaseController
     {
 
         $arguments = array(
-            FORCE_REINSTALL_SLUG => "",
+            Functions::get_plugin_slug() => "",
             Functions::get_plugin_slug("-target") => "theme"
         );
         $target = Functions::force_reinstall_target_self($arguments);
 
         return sprintf(
             '<a class="button %s" href="%s">%s</a>',
-            esc_attr(FORCE_REINSTALL_SLUG),
+            esc_attr(Functions::get_plugin_slug()),
             esc_attr($target),
-            __('Force Reinstall', FORCE_REINSTALL_SLUG)
+            __('Force Reinstall', Functions::get_plugin_slug())
         );
     }
 
@@ -116,7 +116,7 @@ class Admin extends BaseController
 
             //target same page with plugin name to keep arguments
             $arguments = array(
-                FORCE_REINSTALL_SLUG => $plugin_file,
+                Functions::get_plugin_slug() => $plugin_file,
                 Functions::get_plugin_slug("-target") => "plugin"
             );
 
@@ -125,7 +125,7 @@ class Admin extends BaseController
             $link = sprintf(
                 '<a href="%s">%s</a>',
                 esc_attr($target),
-                __('Force Reinstall', FORCE_REINSTALL_SLUG)
+                __('Force Reinstall', Functions::get_plugin_slug())
             );
 
             $actions[] = $link;
@@ -144,20 +144,20 @@ class Admin extends BaseController
     function handle_action(): void
     {
 
-        if (wp_verify_nonce(filter_input(INPUT_GET, Functions::get_plugin_slug("-nonce")), FORCE_REINSTALL_SLUG)) {
+        if (wp_verify_nonce(filter_input(INPUT_GET, Functions::get_plugin_slug("-nonce")), Functions::get_plugin_slug())) {
 
             switch (filter_input(INPUT_GET, Functions::get_plugin_slug("-target"))) {
                 case "plugin":
                 case "theme":
 
-                    $target = filter_input(INPUT_GET, FORCE_REINSTALL_SLUG);
+                    $target = filter_input(INPUT_GET, Functions::get_plugin_slug());
 
                     if ($target) {
 
                         $this->_force_update($target);
 
                         //remove our args and redirect
-                        wp_redirect(remove_query_arg(array("action", Functions::get_plugin_slug("-nonce"), FORCE_REINSTALL_SLUG, Functions::get_plugin_slug("-target")), $_SERVER['REQUEST_URI']));
+                        wp_redirect(remove_query_arg(array("action", Functions::get_plugin_slug("-nonce"), Functions::get_plugin_slug(), Functions::get_plugin_slug("-target")), $_SERVER['REQUEST_URI']));
                         exit;
                     }
                     break;
@@ -215,7 +215,7 @@ class Admin extends BaseController
 
         //https://developer.wordpress.org/reference/hooks/handle_bulk_actions-screen/
         if (version_compare($wp_version, "4.7", ">=")) {
-            $actions[FORCE_REINSTALL_SLUG] = __('Force Reinstall', FORCE_REINSTALL_SLUG);
+            $actions[Functions::get_plugin_slug()] = __('Force Reinstall', Functions::get_plugin_slug());
         }
         return $actions;
     }
@@ -233,7 +233,7 @@ class Admin extends BaseController
     public function plugins_bulk_update(string $redirect, string $action, array $plugins): string
     {
 
-        if ($action == FORCE_REINSTALL_SLUG) {
+        if ($action == Functions::get_plugin_slug()) {
 
             foreach ($plugins as $plugin) {
                 $this->_force_update($plugin);
@@ -302,13 +302,13 @@ class Admin extends BaseController
 
         add_settings_field(
             Functions::get_plugin_slug("-analytics"),
-            __('Collect Anonymous Usage Data', FORCE_REINSTALL_SLUG),
+            __('Collect Anonymous Usage Data', Functions::get_plugin_slug()),
             array($this, 'renderInputField'),
             Functions::get_plugin_slug("-about"),
             Functions::get_plugin_slug("-settings"),
             array(
                 'label_for' => Functions::get_plugin_slug("-analytics"),
-                'class' => FORCE_REINSTALL_SLUG . '-row',
+                'class' => Functions::get_plugin_slug( '-row'),
                 "value" => get_option(Functions::get_plugin_slug("-analytics"), "off"),
                 'description' => Template::get_template(Functions::get_plugin_slug("-about-analytics-disclaimer"), [], "about-analytics-disclaimer.php"),
                 "type" => "checkbox",
@@ -354,8 +354,8 @@ class Admin extends BaseController
     public function on_admin_menu()
     {
         add_menu_page(
-            __('Force Reinstall', FORCE_REINSTALL_SLUG),
-            __('Force Reinstall', FORCE_REINSTALL_SLUG),
+            __('Force Reinstall', Functions::get_plugin_slug()),
+            __('Force Reinstall', Functions::get_plugin_slug()),
             'manage_options',
             Functions::get_plugin_slug(),
             [$this, 'renderAboutPage'],

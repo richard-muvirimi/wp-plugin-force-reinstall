@@ -59,8 +59,8 @@ class Functions
 
         $arguments = array_merge(
             array(
-                "action" => FORCE_REINSTALL_SLUG,
-                FORCE_REINSTALL_SLUG . "-nonce" => wp_create_nonce(FORCE_REINSTALL_SLUG)
+                "action" => Functions::get_plugin_slug(),
+                Functions::get_plugin_slug( "-nonce") => wp_create_nonce(Functions::get_plugin_slug())
             ),
             $input,
             $arguments
