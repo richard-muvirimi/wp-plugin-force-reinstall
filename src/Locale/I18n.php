@@ -12,6 +12,8 @@
 
 namespace Rich4rdMuvirimi\ForceReinstall\Locale;
 
+use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+
 /**
  * Class to handle plugin translations
  *
@@ -35,6 +37,6 @@ class I18n
      */
     public function load_plugin_textdomain()
     {
-        load_plugin_textdomain(FORCE_REINSTALL_SLUG, false, plugin_dir_path(FORCE_REINSTALL_FILE) . 'languages');
+        load_plugin_textdomain(Functions::get_plugin_slug(), false, plugin_dir_path(FORCE_REINSTALL_FILE) . 'languages');
     }
 }

@@ -135,7 +135,7 @@ class ForceReinstall
 
         $this->add_filter('admin_notices', $controller, 'showAdminNotices');
 
-        $this->add_filter('admin_action_' . FORCE_REINSTALL_SLUG, $controller, 'handle_action');
+        $this->add_filter('admin_action_' . Functions::get_plugin_slug(), $controller, 'handle_action');
 
         $this->add_filter('bulk_actions-plugins', $controller, 'add_plugins_bulk_action');
         $this->add_filter('handle_bulk_actions-plugins', $controller, 'plugins_bulk_update', 10, 3);

@@ -26,7 +26,7 @@ if (!defined('WPINC')) {
 
 ?>
 
-<div class="<?php echo FORCE_REINSTALL_SLUG ?>">
+<div class="<?php echo Functions::get_plugin_slug() ?>">
     <div>
         <div class="center">
             <img width="128" src="<?php echo Template::get_image_url("logo.svg") ?>"
@@ -49,7 +49,7 @@ if (!defined('WPINC')) {
     <div class="wrap">
 
         <div>
-            <small><?php _e("Sponsored", FORCE_REINSTALL_SLUG) ?></small>
+            <small><?php _e("Sponsored", Functions::get_plugin_slug()) ?></small>
         </div>
 
         <div style="margin: 15px 0;">
@@ -76,7 +76,7 @@ if (!defined('WPINC')) {
             settings_fields(Functions::get_plugin_slug("-about"));
             do_settings_sections(Functions::get_plugin_slug("-about"));
 
-            submit_button(__('Save', FORCE_REINSTALL_SLUG));
+            submit_button(__('Save', Functions::get_plugin_slug()));
             ?>
         </form>
     </div>
