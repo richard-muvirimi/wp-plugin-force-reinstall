@@ -17,8 +17,8 @@ use Exception;
  * @subpackage ForceReinstall/Helpers
  *
  * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
- * @since 1.5.0
- * @version 1.5.0
+ * @since 1.1.0
+ * @version 1.1.0
  */
 class Logger
 {
@@ -28,8 +28,8 @@ class Logger
      *
      * @param string $event
      * @return void
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
@@ -106,8 +106,8 @@ class Logger
      * Fetch analytics credentials
      *
      * @return array|false
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
@@ -141,8 +141,8 @@ class Logger
      * Get users user agent to forward for analytics collection
      *
      * @return string
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
@@ -155,8 +155,8 @@ class Logger
      * Get unique session id
      *
      * @return string
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
@@ -178,8 +178,8 @@ class Logger
      * Get engagement millisecond time
      *
      * @return float
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
