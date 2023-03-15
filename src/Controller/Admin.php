@@ -281,8 +281,8 @@ class Admin extends BaseController
      *
      * @return void
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      */
     public function registerOptions(): void
     {
@@ -320,8 +320,8 @@ class Admin extends BaseController
      * Display the settings header
      *
      * @return void
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
@@ -368,8 +368,8 @@ class Admin extends BaseController
      * Render the about page
      *
      * @return void
-     * @since 1.5.0
-     * @version 1.5.0
+     * @since 1.1.0
+     * @version 1.1.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */

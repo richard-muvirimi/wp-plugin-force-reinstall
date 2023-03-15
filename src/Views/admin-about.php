@@ -18,8 +18,8 @@ if (!defined('WPINC')) {
  *
  * @link http://richard.co.zw
  * @author Richard Muvirimi <tygalive@gmail.com>
- * @since 1.5.0
- * @version 1.5.0
+ * @since 1.1.0
+ * @version 1.1.0
  *
  * @var array $plugin
  */
