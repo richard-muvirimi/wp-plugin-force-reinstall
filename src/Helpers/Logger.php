@@ -29,7 +29,7 @@ class Logger
      * @param string $event
      * @return void
      * @since 1.1.0
-     * @version 1.1.0
+     * @version 1.1.7
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
@@ -62,9 +62,6 @@ class Logger
                     $baseRequest->addUserProperty(new UserProperty("php_version", PHP_VERSION));
                     $baseRequest->addUserProperty(new UserProperty("wordpress_version", get_bloginfo("version")));
                     $baseRequest->addUserProperty(new UserProperty("plugin_version", FORCE_REINSTALL_VERSION));
-
-                    $woocommerce = get_plugin_data(WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . "woocommerce/woocommerce.php");
-                    $baseRequest->addUserProperty(new UserProperty("woocommerce_version", $woocommerce["Version"]));
 
                     $baseEvent = new BaseEvent($event);
 
