@@ -176,10 +176,15 @@ class Admin extends BaseController
      */
     private function _force_update(string $target): void
     {
+
+        $targetType = get_current_screen()->base;
+
+        Logger::logEvent("force_reinstall_". $targetType);
+
         /**
          * Modify Site transient
          */
-        $updates = get_site_transient('update_' . get_current_screen()->base);
+        $updates = get_site_transient('update_' . $targetType);
 
         //check if we don't already need an update or can be...
         if (isset($updates->no_update[$target])) {
@@ -196,7 +201,7 @@ class Admin extends BaseController
             $updates->last_checked = time();
 
             //save
-            set_site_transient('update_' . get_current_screen()->base, $updates);
+            set_site_transient('update_' . $targetType, $updates);
         }
     }
 
