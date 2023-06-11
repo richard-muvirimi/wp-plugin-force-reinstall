@@ -41,18 +41,18 @@ class ControllerLoaderTest extends TestCase
         $loader->add_filter('the_title', '__return_true', 25);
 
         // constants loaded
-        self::assertTrue(FORCE_REINSTALL_VERSION !== null);
-        self::assertTrue(FORCE_REINSTALL_NAME !== null);
-        self::assertTrue(FORCE_REINSTALL_FILE !== null);
-        self::assertTrue(FORCE_REINSTALL_SLUG !== null);
+        self::assertTrue(FORCE_REINSTALL_VERSION !== null, "FORCE_REINSTALL_VERSION is null");
+        self::assertTrue(FORCE_REINSTALL_NAME !== null, "FORCE_REINSTALL_NAME is null");
+        self::assertTrue(FORCE_REINSTALL_FILE !== null, "FORCE_REINSTALL_FILE is null");
+        self::assertTrue(FORCE_REINSTALL_SLUG !== null, "FORCE_REINSTALL_SLUG is null");
 
         // assert added.
-        self::assertNotFalse(has_action('init', '__return_true'));
-        self::assertNotFalse(has_filter('the_title', '__return_true'));
+        self::assertNotFalse(has_action('init', '__return_true'), "init action not added");
+        self::assertNotFalse(has_filter('the_title', '__return_true'), "the_title filter not added");
 
         // assert priority.
-        self::assertSame(25, has_action('init', '__return_true'));
-        self::assertSame(25, has_filter('the_title', '__return_true'));
+        self::assertSame(25, has_action('init', '__return_true'), "init action priority not 25");
+        self::assertSame(25, has_filter('the_title', '__return_true'), "the_title filter priority not 25");
     }
 
     /**
