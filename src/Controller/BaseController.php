@@ -7,7 +7,7 @@
  * @package ForceReinstall
  * @subpackage ForceReinstall/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.3.0
  * @version 1.3.0
  */
@@ -20,7 +20,7 @@ namespace Rich4rdMuvirimi\ForceReinstall\Controller;
  * @package ForceReinstall
  * @subpackage ForceReinstall/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.3.0
  * @version 1.3.0
  */

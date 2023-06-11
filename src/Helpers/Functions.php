@@ -6,7 +6,7 @@
  * @package ForceReinstall
  * @subpackage ForceReinstall/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -19,7 +19,7 @@ namespace Rich4rdMuvirimi\ForceReinstall\Helpers;
  * @package ForceReinstall
  * @subpackage ForceReinstall/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -35,7 +35,7 @@ class Functions
      * @since 1.0.3
      * @version 1.0.6
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_plugin_slug(string $suffix = ''): string
     {

@@ -16,7 +16,7 @@ if (!defined('WPINC')) {
  * @subpackage ForceReinstall/Views
  *
  * @link http://richard.co.zw
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.1.0
  * @version 1.1.0
  *

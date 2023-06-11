@@ -11,10 +11,9 @@ do {
 
     // break if we don't find the file
     if (strrpos($root, DIRECTORY_SEPARATOR, intval(strpos($root, PATH_SEPARATOR))) < 3) {
-        define('FORCE_REINSTALL_SLUG', 'force-reinstall');
-        break;
+        throw new Exception("Base Plugin file not found");
     }
-} while (!file_exists($root . '/force-reinstall.php'));
+} while (!file_exists($root . DIRECTORY_SEPARATOR . 'force-reinstall.php'));
 
 /**
  * WP loaded check constant
@@ -24,7 +23,7 @@ const WPINC = 'wp-includes';
 /**
  * Reference to this file
  */
-const FORCE_REINSTALL_FILE = __FILE__;
+define("FORCE_REINSTALL_FILE", $root . DIRECTORY_SEPARATOR . 'force-reinstall.php');
 
 /**
  * Method stubs
@@ -65,18 +64,22 @@ if (!function_exists('register_uninstall_hook')) {
     {
     }
 }
+if (!function_exists('plugin_basename')) {
 
-/**
- * Load constants, no need for the actual value
- */
-$content = file_get_contents($root . '/force-reinstall.php');
-
-preg_match_all('/define\("(.*?)",\s?"?(.*?)"?\);/m', $content, $matches);
-
-$matches = array_combine($matches[1], $matches[2]);
-
-foreach ($matches as $constant => $value) {
-    if (!defined($constant)) {
-        define($constant, $value);
+    function plugin_basename(string $file)
+    {
+        return basename($file, ".php") . "/" . basename($file);
     }
 }
+
+/**
+ * Load constants
+ */
+$content = file_get_contents(FORCE_REINSTALL_FILE);
+
+preg_match('/#region\sConstants(.*)#endregion\sConstants/s', $content, $matches);
+
+eval($matches[1]);
+
+// clean up
+unset($content, $matches);

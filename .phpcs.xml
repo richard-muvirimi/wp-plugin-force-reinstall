@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="ForceReinstall" namespace="Rich4rdMuvirimi\ForceReinstall\">
+<ruleset name="ForceReinstall" namespace="RichardMuvirimi\ForceReinstall\">
 <description>Coding Standards for Force-Reinstall and Php 7.3</description>
 
 <config name="testVersion" value="7.3-"/>
