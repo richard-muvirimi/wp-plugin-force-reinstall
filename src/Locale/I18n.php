@@ -5,7 +5,7 @@
  * @package ForceReinstall
  * @subpackage ForceReinstall/Locale
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -20,7 +20,7 @@ use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
  * @package ForceReinstall
  * @subpackage ForceReinstall/Locale
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */

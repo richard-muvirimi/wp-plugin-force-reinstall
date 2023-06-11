@@ -7,7 +7,7 @@
  * @package    Force_Reinstall
  * @subpackage Force_Reinstall/includes
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.2
  */
@@ -25,7 +25,7 @@ use Rich4rdMuvirimi\ForceReinstall\Locale\I18n;
 /**
  * Class to bootstrap the plugin
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.2
  *
@@ -48,7 +48,7 @@ class ForceReinstall
      *
      * @var self
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      * @since 1.0.0
      * @version 1.0.0
      */
@@ -61,7 +61,7 @@ class ForceReinstall
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     protected function __construct()
     {

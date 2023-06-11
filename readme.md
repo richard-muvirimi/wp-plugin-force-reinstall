@@ -4,8 +4,8 @@
 - **_Donate link:_** [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 - **_Tags:_** plugin, theme, install, update, corrupted, fix, reinstall, redo
 - **_Requires at least:_** 4.0
-- **_Tested up to:_** 6.1
-- **_Stable tag:_** 1.1.7
+- **_Tested up to:_** 6.2
+- **_Stable tag:_** 1.1.8
 - **_License:_** GPLv2 or later
 - **_License URI:_** [GPL - 2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -54,6 +54,10 @@ In the search field, type "Force Reinstall," and click on "Search Plugins." Once
 
 ## Changelog
 
+**_1.1.8_**
+
+- Minor Optimizations
+
 **_ 1.1.0 - 1.1.7 _**
 
 - Set minimum supported version to 7.3.
@@ -65,7 +69,7 @@ In the search field, type "Force Reinstall," and click on "Search Plugins." Once
 
 **_1.0.1_**
 
-- Minor Optimisations
+- Minor Optimizations
 
 **_1.0.0_**
 

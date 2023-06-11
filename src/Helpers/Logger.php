@@ -16,7 +16,7 @@ use Exception;
  * @package ForceReinstall
  * @subpackage ForceReinstall/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.1.0
  * @version 1.1.0
  */
@@ -31,7 +31,7 @@ class Logger
      * @since 1.1.0
      * @version 1.1.7
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function logEvent(string $event): void
     {
@@ -106,7 +106,7 @@ class Logger
      * @since 1.1.0
      * @version 1.1.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function fetchAnalyticsCredentials()
     {
@@ -141,7 +141,7 @@ class Logger
      * @since 1.1.0
      * @version 1.1.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function getUserAgent(): string
     {
@@ -153,9 +153,9 @@ class Logger
      *
      * @return string
      * @since 1.1.0
-     * @version 1.1.0
+     * @version 1.1.8
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function getSessionId(): string
     {
@@ -165,7 +165,9 @@ class Logger
         $unique_id = $_COOKIE[$cookie_name] ?? uniqid("fr-", true);
         $domain = parse_url(site_url(), PHP_URL_HOST);
 
-        setcookie($cookie_name, $unique_id, time() + MONTH_IN_SECONDS, "/", $domain, true, true);
+        if (!headers_sent()){
+            setcookie($cookie_name, $unique_id, time() + MONTH_IN_SECONDS, "/", $domain, true, true);
+        }
 
         return $unique_id;
 
@@ -176,9 +178,9 @@ class Logger
      *
      * @return float
      * @since 1.1.0
-     * @version 1.1.0
+     * @version 1.1.8
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function getEngagementTime(): float
     {
@@ -190,7 +192,9 @@ class Logger
         $domain = parse_url(site_url(), PHP_URL_HOST);
 
         // Update the start time cookie
-        setcookie($cookie_name, $time_now, time() + HOUR_IN_SECONDS, '/', $domain, true, true);
+        if (!headers_sent()){
+            setcookie($cookie_name, $time_now, time() + HOUR_IN_SECONDS, '/', $domain, true, true);
+        }
 
         // Calculate the engagement time
         return ($time_now - $start_time) * 1000;

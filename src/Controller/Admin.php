@@ -5,7 +5,7 @@
  * @package ForceReinstall
  * @subpackage ForceReinstall/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -22,7 +22,7 @@ use Rich4rdMuvirimi\ForceReinstall\Helpers\Template;
  * @package ForceReinstall
  * @subpackage ForceReinstall/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.1
  */
@@ -255,7 +255,7 @@ class Admin extends BaseController
      * @version 1.0.1
      * @since 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function showAdminNotices(): void
     {
@@ -285,7 +285,7 @@ class Admin extends BaseController
      * Register plugin options
      *
      * @return void
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      * @since 1.1.0
      * @version 1.1.0
      */
@@ -328,7 +328,7 @@ class Admin extends BaseController
      * @since 1.1.0
      * @version 1.1.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function renderSectionHeader(): void
     {
@@ -344,7 +344,7 @@ class Admin extends BaseController
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function renderInputField(array $args): void
     {
@@ -354,9 +354,13 @@ class Admin extends BaseController
     /**
      * On create the about menu
      *
+     * @return void
      * @since 1.0.0
+     * @version 1.1.8
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
-    public function on_admin_menu()
+    public function on_admin_menu(): void
     {
         add_menu_page(
             __('Force Reinstall', Functions::get_plugin_slug()),
@@ -364,7 +368,7 @@ class Admin extends BaseController
             'manage_options',
             Functions::get_plugin_slug(),
             [$this, 'renderAboutPage'],
-            Template::get_image_url('logo.svg')
+            Template::get_file_base64(Template::get_image_path('icon.svg'), "data:image/svg+xml;base64,"),
         );
 
     }
@@ -376,7 +380,7 @@ class Admin extends BaseController
      * @since 1.1.0
      * @version 1.1.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function renderAboutPage(): void
     {

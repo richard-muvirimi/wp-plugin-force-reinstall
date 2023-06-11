@@ -2,7 +2,7 @@
 /**
  * File for php unit testcases
  *
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -17,7 +17,7 @@ use Rich4rdMuvirimi\ForceReinstall\ForceReinstall;
 /**
  * Test Cases class
  *
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -39,6 +39,12 @@ class ControllerLoaderTest extends TestCase
         $loader = ForceReinstall::instance();
         $loader->add_action('init', '__return_true', 25);
         $loader->add_filter('the_title', '__return_true', 25);
+
+        // constants loaded
+        self::assertTrue(FORCE_REINSTALL_VERSION !== null);
+        self::assertTrue(FORCE_REINSTALL_NAME !== null);
+        self::assertTrue(FORCE_REINSTALL_FILE !== null);
+        self::assertTrue(FORCE_REINSTALL_SLUG !== null);
 
         // assert added.
         self::assertNotFalse(has_action('init', '__return_true'));
