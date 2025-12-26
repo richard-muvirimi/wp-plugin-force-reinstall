@@ -1,5 +1,6 @@
 {
     "name": "rich4rdmuvirimi/force-reinstall",
+    "version" : "1.1.9",
     "description": "Easily force a Plugin or Theme reinstall from WordPress.org",
     "type": "wordpress-plugin",
     "license": "GNU-V2",

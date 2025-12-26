@@ -3,8 +3,8 @@ Contributors: tygalive
 Donate link: [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 Tags: plugin, theme, install, update, corrupted, fix, reinstall, redo
 Requires at least: 4.0
-Tested up to: 6.2
-Stable tag: 1.1.8
+Tested up to: 6.9
+Stable tag: 1.1.9
 License: GPLv2 or later
 License URI: [GPL - 2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -64,7 +64,7 @@ No, your data will not be affected. The Force Reinstall option only replaces the
 
 == Changelog ==
 
-= 1.1.8 =
+= 1.1.8 - 1.1.9 =
 * Minor optimizations
 
 = 1.1.0 - 1.1.7 =
