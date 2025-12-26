@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd3dbddbe62796abf5f22e368aaf609d",
+    "content-hash": "1b5bc3adba53dee4ead3963b4f3f7487",
     "packages": [
         {
             "name": "br33f/php-ga4-mp",
