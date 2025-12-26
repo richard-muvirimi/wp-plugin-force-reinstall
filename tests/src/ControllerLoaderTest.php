@@ -7,12 +7,12 @@
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Tests;
+namespace RichardMuvirimi\ForceReinstall\Tests;
 
 use Brain\Monkey;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
-use Rich4rdMuvirimi\ForceReinstall\ForceReinstall;
+use RichardMuvirimi\ForceReinstall\ForceReinstall;
 
 /**
  * Test Cases class

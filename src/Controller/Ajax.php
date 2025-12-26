@@ -13,10 +13,10 @@
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Controller;
+namespace RichardMuvirimi\ForceReinstall\Controller;
 
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Logger;
+use RichardMuvirimi\ForceReinstall\Helpers\Functions;
+use RichardMuvirimi\ForceReinstall\Helpers\Logger;
 
 /**
  * Ajax side controller

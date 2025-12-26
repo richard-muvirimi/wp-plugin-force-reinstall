@@ -12,7 +12,7 @@
  * @version 1.3.0
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Controller;
+namespace RichardMuvirimi\ForceReinstall\Controller;
 
 /**
  * Base controller to rule them all

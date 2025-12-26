@@ -1,6 +1,6 @@
 <?php
 
-namespace Rich4rdMuvirimi\ForceReinstall\Helpers;
+namespace RichardMuvirimi\ForceReinstall\Helpers;
 
 use ParagonIE\ConstantTime\Base64UrlSafe;
 

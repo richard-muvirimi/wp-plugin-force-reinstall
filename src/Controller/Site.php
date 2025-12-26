@@ -12,7 +12,7 @@
  * @version 1.0.2
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Controller;
+namespace RichardMuvirimi\ForceReinstall\Controller;
 
 /**
  * Site side controller

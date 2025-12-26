@@ -1,6 +1,6 @@
 <?php
 
-namespace Rich4rdMuvirimi\ForceReinstall\Views;
+namespace RichardMuvirimi\ForceReinstall\Views;
 
 /**
  * Display text field option

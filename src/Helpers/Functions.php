@@ -11,7 +11,7 @@
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Helpers;
+namespace RichardMuvirimi\ForceReinstall\Helpers;
 
 /**
  * Class to handle plugin helper functions

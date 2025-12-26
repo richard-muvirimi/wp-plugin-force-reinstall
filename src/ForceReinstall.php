@@ -12,15 +12,15 @@
  * @version 1.0.2
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall;
+namespace RichardMuvirimi\ForceReinstall;
 
 use BadMethodCallException;
-use Rich4rdMuvirimi\ForceReinstall\Controller\Admin;
-use Rich4rdMuvirimi\ForceReinstall\Controller\Ajax;
-use Rich4rdMuvirimi\ForceReinstall\Controller\Plugin;
-use Rich4rdMuvirimi\ForceReinstall\Controller\Site;
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
-use Rich4rdMuvirimi\ForceReinstall\Locale\I18n;
+use RichardMuvirimi\ForceReinstall\Controller\Admin;
+use RichardMuvirimi\ForceReinstall\Controller\Ajax;
+use RichardMuvirimi\ForceReinstall\Controller\Plugin;
+use RichardMuvirimi\ForceReinstall\Controller\Site;
+use RichardMuvirimi\ForceReinstall\Helpers\Functions;
+use RichardMuvirimi\ForceReinstall\Locale\I18n;
 
 /**
  * Class to bootstrap the plugin

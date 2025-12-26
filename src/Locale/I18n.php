@@ -10,9 +10,9 @@
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Locale;
+namespace RichardMuvirimi\ForceReinstall\Locale;
 
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+use RichardMuvirimi\ForceReinstall\Helpers\Functions;
 
 /**
  * Class to handle plugin translations

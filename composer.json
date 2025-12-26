@@ -1,13 +1,13 @@
 {
-    "name": "rich4rdmuvirimi/force-reinstall",
+    "name": "richardmuvirimi/force-reinstall",
     "version" : "1.1.9",
     "description": "Easily force a Plugin or Theme reinstall from WordPress.org",
     "type": "wordpress-plugin",
     "license": "GNU-V2",
     "autoload": {
         "psr-4": {
-            "Rich4rdMuvirimi\\ForceReinstall\\": "src/",
-            "Rich4rdMuvirimi\\ForceReinstall\\Vendor\\": "vendor/force-reinstall/psr-4"
+            "RichardMuvirimi\\ForceReinstall\\": "src/",
+            "RichardMuvirimi\\ForceReinstall\\Vendor\\": "vendor/force-reinstall/psr-4"
         },
         "classmap": [
             "vendor/force-reinstall/classes/"
@@ -15,8 +15,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Rich4rdMuvirimi\\ForceReinstall\\Tests\\": "tests/src/",
-            "Rich4rdMuvirimi\\ForceReinstall\\": "src/"
+            "RichardMuvirimi\\ForceReinstall\\Tests\\": "tests/src/",
+            "RichardMuvirimi\\ForceReinstall\\": "src/"
         }
     },
     "config": {
@@ -108,7 +108,7 @@
     },
     "extra": {
         "mozart": {
-            "dep_namespace": "Rich4rdMuvirimi\\ForceReinstall\\Vendor\\",
+            "dep_namespace": "RichardMuvirimi\\ForceReinstall\\Vendor\\",
             "dep_directory": "/vendor/force-reinstall/psr-4/",
             "classmap_directory": "/vendor/force-reinstall/classes/",
             "classmap_prefix": "ForceReinstall_",

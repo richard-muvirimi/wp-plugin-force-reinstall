@@ -10,11 +10,11 @@
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\ForceReinstall\Controller;
+namespace RichardMuvirimi\ForceReinstall\Controller;
 
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Logger;
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Template;
+use RichardMuvirimi\ForceReinstall\Helpers\Functions;
+use RichardMuvirimi\ForceReinstall\Helpers\Logger;
+use RichardMuvirimi\ForceReinstall\Helpers\Template;
 
 /**
  * Admin side controller

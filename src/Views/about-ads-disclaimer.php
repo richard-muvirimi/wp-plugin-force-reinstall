@@ -1,8 +1,8 @@
 <?php
 
-namespace Rich4rdMuvirimi\ForceReinstall\Views;
+namespace RichardMuvirimi\ForceReinstall\Views;
 
-use Rich4rdMuvirimi\ForceReinstall\Helpers\Functions;
+use RichardMuvirimi\ForceReinstall\Helpers\Functions;
 
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.

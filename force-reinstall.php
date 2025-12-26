@@ -20,7 +20,7 @@
  * Domain Path:       /languages
  */
 
-use Rich4rdMuvirimi\ForceReinstall\ForceReinstall;
+use RichardMuvirimi\ForceReinstall\ForceReinstall;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
