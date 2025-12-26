@@ -1,5 +1,4 @@
 *.code-workspace
-composer.lock
 /vendor/
 
 #Docker
