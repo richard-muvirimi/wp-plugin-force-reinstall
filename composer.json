@@ -1,6 +1,6 @@
 {
     "name": "richardmuvirimi/force-reinstall",
-    "version" : "1.1.10",
+    "version" : "1.1.11",
     "description": "Easily force a Plugin or Theme reinstall from WordPress.org",
     "type": "wordpress-plugin",
     "license": "GNU-V2",
