@@ -14,27 +14,59 @@ jobs:
     steps:
     - name: Checkout build
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Extract version from plugin file
+      id: get_version
+      run: |
+        VERSION=$(grep -oP "Version:\s+\K[\d\.]+" force-reinstall.php)
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "Version found: $VERSION"
+    
+    - name: Check if tag exists
+      id: check_tag
+      run: |
+        if git rev-parse "v${{ steps.get_version.outputs.version }}" >/dev/null 2>&1; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+          echo "Tag v${{ steps.get_version.outputs.version }} already exists"
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+          echo "Tag v${{ steps.get_version.outputs.version }} does not exist - proceeding with deployment"
+        fi
     
     - name: Cache Composer dependencies
-      uses: actions/cache@v2
+      if: steps.check_tag.outputs.exists == 'false'
+      uses: actions/cache@v4
       with:
         path: /tmp/composer-cache
         key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
       
     - name: Composer Setup
+      if: steps.check_tag.outputs.exists == 'false'
       uses: php-actions/composer@v6
       with:
         dev: no
         php_version: "7.4"
         version: latest
         command: install
+    
+    - name: Create Git tag
+      if: steps.check_tag.outputs.exists == 'false'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release version ${{ steps.get_version.outputs.version }}"
+        git push origin "v${{ steps.get_version.outputs.version }}"
       
     - name: Copy to build dir
+      if: steps.check_tag.outputs.exists == 'false'
       run: |
         mkdir build
         rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' --exclude 'build' ./ build/
       
     - name: WordPress Plugin Deploy
+      if: steps.check_tag.outputs.exists == 'false'
       id: deploy
       uses: richard-muvirimi/deploy-wordpress-plugin@development
       with:

@@ -2,6 +2,9 @@
 /**
  * Phpunit bootstrap file for running tests
  *
+ * phpcs:disable WordPress.VIP.RestrictedFunctions.file_get_contents_file_get_contents
+ * phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+ * phpcs:disable WordPress.WP.AlternativeFunctions.file_system_read_file_get_contents
  */
 
 $root = __DIR__;
@@ -66,7 +69,7 @@ if (!function_exists('register_uninstall_hook')) {
 }
 if (!function_exists('plugin_basename')) {
 
-    function plugin_basename(string $file)
+    function plugin_basename(string $file):string
     {
         return basename($file, ".php") . "/" . basename($file);
     }
